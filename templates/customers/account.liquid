@@ -1,0 +1,22 @@
+<section style="min-height: 70vh; padding: 48px 20px; background: #070706; color: #fff8df;">
+  <div style="width: min(980px, 100%); margin: 0 auto;">
+    <p style="margin: 0 0 12px; color: #fed100; font-weight: 900; text-transform: uppercase;">Account</p>
+    <h1 style="margin: 0; font-size: clamp(40px, 8vw, 78px); line-height: .95; text-transform: uppercase;">Welcome, {{ customer.first_name | default: customer.email }}</h1>
+    <div style="margin-top: 28px; display: grid; gap: 20px;">
+      <div style="border: 1px solid rgba(254,209,0,.35); padding: 22px;">
+        <h2 style="margin: 0 0 14px; color: #fed100; text-transform: uppercase;">Recent Orders</h2>
+        {% if customer.orders.size > 0 %}
+          {% for order in customer.orders %}
+            <p style="margin: 0 0 10px;">
+              <a href="{{ order.customer_url }}" style="color: #fed100;">{{ order.name }}</a>
+              <span>{{ order.created_at | date: "%B %d, %Y" }} - {{ order.total_price | money }}</span>
+            </p>
+          {% endfor %}
+        {% else %}
+          <p style="margin: 0;">No orders yet.</p>
+        {% endif %}
+      </div>
+      <a href="{{ routes.account_logout_url }}" style="display: inline-flex; width: fit-content; padding: 14px 18px; background: #fed100; color: #070706; font-weight: 900; text-decoration: none; text-transform: uppercase;">Log out</a>
+    </div>
+  </div>
+</section>
