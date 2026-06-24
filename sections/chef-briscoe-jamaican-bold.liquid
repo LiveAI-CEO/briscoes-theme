@@ -1,0 +1,165 @@
+{% liquid
+  assign booking_url = section.settings.booking_url | default: '/pages/contact'
+  assign menu_url = section.settings.menu_url | default: '/pages/menus'
+  assign shop_url = section.settings.shop_url | default: '/collections/all'
+  assign community_url = section.settings.community_url | default: '/pages/the-one-pot-family'
+  assign classes_url = section.settings.classes_url | default: '/pages/virtual-cooking-classes'
+  assign phone_href = section.settings.phone | remove: ' ' | remove: '(' | remove: ')' | remove: '-' | prepend: 'tel:'
+%}
+
+<section id='chef-briscoe-bold-{{ section.id }}' class='bk-bold'>
+  <style>
+    #shopify-section-{{ section.id }} .bk-bold{--black:#070706;--green:#009b3a;--gold:#fed100;--cream:#fff8df;--white:#fff;--red:#d7261e;--line:rgba(254,209,0,.32);color:var(--cream);background:linear-gradient(34deg,transparent 0 42%,var(--gold) 42% 47%,transparent 47% 53%,var(--gold) 53% 58%,transparent 58%),linear-gradient(146deg,var(--green) 0 48%,var(--black) 48% 52%,#063b1b 52% 100%);overflow:hidden;position:relative;isolation:isolate}
+    #shopify-section-{{ section.id }} .bk-bold:before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 12% 10%,rgba(254,209,0,.32),transparent 28%),radial-gradient(circle at 88% 16%,rgba(0,155,58,.34),transparent 30%),linear-gradient(180deg,rgba(0,0,0,.08),rgba(0,0,0,.7));z-index:-1}
+    #shopify-section-{{ section.id }} .bk-wrap{width:min(1180px,calc(100% - 32px));margin:0 auto}
+    #shopify-section-{{ section.id }} h1,#shopify-section-{{ section.id }} h2,#shopify-section-{{ section.id }} h3,#shopify-section-{{ section.id }} p{margin:0}
+    #shopify-section-{{ section.id }} .bk-hero{min-height:720px;display:grid;grid-template-columns:minmax(0,1fr) minmax(320px,.8fr);gap:36px;align-items:center;padding:72px 0 56px}
+    #shopify-section-{{ section.id }} .bk-kicker{display:inline-flex;align-items:center;gap:10px;padding:9px 12px;border:1px solid var(--line);background:rgba(0,0,0,.72);color:var(--gold);font-size:13px;font-weight:900;text-transform:uppercase}
+    #shopify-section-{{ section.id }} .bk-kicker:before{content:'';width:30px;height:17px;background:linear-gradient(34deg,transparent 0 43%,var(--gold) 43% 48%,transparent 48% 52%,var(--gold) 52% 57%,transparent 57%),linear-gradient(146deg,var(--green) 0 48%,var(--black) 48% 52%,var(--green) 52% 100%);border:1px solid rgba(255,255,255,.25)}
+    #shopify-section-{{ section.id }} .bk-title{margin-top:18px;color:var(--white);font-size:clamp(46px,8vw,104px);font-weight:950;line-height:.88;text-transform:uppercase;text-shadow:0 7px 0 rgba(0,155,58,.58),0 15px 34px rgba(0,0,0,.62)}
+    #shopify-section-{{ section.id }} .bk-title strong{color:var(--gold);text-shadow:0 7px 0 rgba(0,0,0,.68)}
+    #shopify-section-{{ section.id }} .bk-lead{max-width:760px;margin-top:24px;color:rgba(255,248,223,.86);font-size:clamp(18px,2vw,23px);line-height:1.5;font-weight:650}
+    #shopify-section-{{ section.id }} .bk-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+    #shopify-section-{{ section.id }} .bk-btn{display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:14px 18px;border:2px solid transparent;border-radius:8px;background:var(--gold);color:var(--black);box-shadow:0 10px 0 rgba(0,0,0,.45);font-weight:950;text-decoration:none;text-transform:uppercase;line-height:1}
+    #shopify-section-{{ section.id }} .bk-btn.green{background:var(--green);color:var(--white)}
+    #shopify-section-{{ section.id }} .bk-btn.dark{background:rgba(0,0,0,.78);border-color:var(--line);color:var(--gold)}
+    #shopify-section-{{ section.id }} .bk-card{border:1px solid var(--line);border-radius:8px;background:rgba(0,0,0,.78);box-shadow:0 24px 70px rgba(0,0,0,.35);overflow:hidden}
+    #shopify-section-{{ section.id }} .bk-media{aspect-ratio:4/5;min-height:480px;background:linear-gradient(34deg,transparent 0 42%,var(--gold) 42% 48%,transparent 48% 52%,var(--gold) 52% 58%,transparent 58%),linear-gradient(146deg,var(--green) 0 48%,var(--black) 48% 52%,var(--green) 52% 100%);position:relative}
+    #shopify-section-{{ section.id }} .bk-media img{width:100%;height:100%;object-fit:cover;display:block}
+    #shopify-section-{{ section.id }} .bk-badge{position:absolute;left:18px;right:18px;bottom:18px;padding:18px;border:1px solid var(--line);background:rgba(0,0,0,.8)}
+    #shopify-section-{{ section.id }} .bk-badge strong{display:block;color:var(--gold);font-size:24px;font-weight:950;text-transform:uppercase;line-height:1}
+    #shopify-section-{{ section.id }} .bk-badge span{display:block;margin-top:8px;color:var(--cream);font-weight:700;line-height:1.4}
+    #shopify-section-{{ section.id }} .bk-strip{border-block:2px solid var(--gold);background:var(--green);color:var(--white);font-weight:950;text-transform:uppercase;overflow:hidden;white-space:nowrap}
+    #shopify-section-{{ section.id }} .bk-strip div{display:inline-flex;gap:28px;padding:13px 0;animation:bkMove{{ section.id }} 28s linear infinite}
+    #shopify-section-{{ section.id }} .bk-strip span{padding-left:28px}
+    @keyframes bkMove{{ section.id }}{to{transform:translateX(-50%)}}
+    #shopify-section-{{ section.id }} .bk-block{padding:68px 0}
+    #shopify-section-{{ section.id }} .bk-head{display:grid;grid-template-columns:minmax(0,.85fr) minmax(260px,.5fr);gap:26px;align-items:end;margin-bottom:24px}
+    #shopify-section-{{ section.id }} .bk-head h2{color:var(--white);font-size:clamp(32px,5vw,60px);line-height:.98;font-weight:950;text-transform:uppercase}
+    #shopify-section-{{ section.id }} .bk-head p,#shopify-section-{{ section.id }} .bk-tile p,#shopify-section-{{ section.id }} .bk-copy{color:rgba(255,248,223,.82);font-size:16px;line-height:1.58;font-weight:650}
+    #shopify-section-{{ section.id }} .bk-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+    #shopify-section-{{ section.id }} .bk-grid.three{grid-template-columns:repeat(3,minmax(0,1fr))}
+    #shopify-section-{{ section.id }} .bk-grid.two{grid-template-columns:repeat(2,minmax(0,1fr))}
+    #shopify-section-{{ section.id }} .bk-tile{padding:22px;border:1px solid var(--line);border-radius:8px;background:linear-gradient(180deg,rgba(17,17,13,.92),rgba(0,0,0,.82))}
+    #shopify-section-{{ section.id }} .bk-tile:before{content:'';display:block;width:52px;height:7px;margin-bottom:18px;background:linear-gradient(90deg,var(--green) 0 36%,var(--gold) 36% 68%,var(--red) 68%)}
+    #shopify-section-{{ section.id }} .bk-tile h3{color:var(--white);font-size:22px;line-height:1.05;font-weight:950;text-transform:uppercase}
+    #shopify-section-{{ section.id }} .bk-tile p{margin-top:12px}
+    #shopify-section-{{ section.id }} .bk-tile a{display:inline-flex;margin-top:16px;color:var(--gold);font-weight:950;text-decoration:none;text-transform:uppercase}
+    #shopify-section-{{ section.id }} .bk-feature{display:grid;grid-template-columns:minmax(0,.9fr) minmax(280px,1fr);border:1px solid var(--line);border-radius:8px;background:rgba(0,0,0,.76);overflow:hidden}
+    #shopify-section-{{ section.id }} .bk-feature-img{min-height:410px;background:linear-gradient(34deg,transparent 0 42%,var(--gold) 42% 48%,transparent 48% 52%,var(--gold) 52% 58%,transparent 58%),linear-gradient(146deg,var(--green) 0 48%,var(--black) 48% 52%,var(--green) 52% 100%)}
+    #shopify-section-{{ section.id }} .bk-feature-img img{width:100%;height:100%;object-fit:cover;display:block}
+    #shopify-section-{{ section.id }} .bk-feature-body{padding:clamp(28px,4vw,52px)}
+    #shopify-section-{{ section.id }} .bk-feature-body h2{color:var(--white);font-size:clamp(30px,4vw,54px);line-height:1;font-weight:950;text-transform:uppercase}
+    #shopify-section-{{ section.id }} .bk-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+    #shopify-section-{{ section.id }} .bk-tags span{padding:8px 10px;border:1px solid var(--line);background:rgba(0,155,58,.18);font-size:12px;font-weight:900;text-transform:uppercase}
+    #shopify-section-{{ section.id }} .bk-form{display:grid;gap:12px;padding:22px;border:1px solid var(--line);border-radius:8px;background:rgba(0,0,0,.78)}
+    #shopify-section-{{ section.id }} .bk-form h2{color:var(--gold);font-size:22px;font-weight:950;text-transform:uppercase}
+    #shopify-section-{{ section.id }} input,#shopify-section-{{ section.id }} textarea{width:100%;min-height:48px;padding:12px;border:1px solid rgba(254,209,0,.34);border-radius:8px;background:rgba(255,255,255,.08);color:var(--cream);font:inherit;font-weight:700}
+    #shopify-section-{{ section.id }} textarea{min-height:116px;resize:vertical}
+    #shopify-section-{{ section.id }} .bk-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+    #shopify-section-{{ section.id }} details{border:1px solid var(--line);border-radius:8px;background:rgba(0,0,0,.66);overflow:hidden}
+    #shopify-section-{{ section.id }} summary{cursor:pointer;padding:18px;color:var(--white);font-weight:950;text-transform:uppercase}
+    #shopify-section-{{ section.id }} details p{padding:0 18px 18px;color:rgba(255,248,223,.82);line-height:1.52;font-weight:650}
+    #shopify-section-{{ section.id }} .bk-local{padding:32px;border:2px solid var(--gold);border-radius:8px;background:linear-gradient(90deg,rgba(0,155,58,.9),rgba(0,0,0,.9) 50%,rgba(254,209,0,.92));color:var(--white)}
+    #shopify-section-{{ section.id }} .bk-local h2{font-size:clamp(30px,4vw,52px);line-height:1;font-weight:950;text-transform:uppercase}
+    #shopify-section-{{ section.id }} .bk-local p{max-width:780px;margin-top:14px;font-weight:750;line-height:1.5}
+    #shopify-section-{{ section.id }} .bk-sticky{display:none}
+    @media(max-width:990px){#shopify-section-{{ section.id }} .bk-hero,#shopify-section-{{ section.id }} .bk-head,#shopify-section-{{ section.id }} .bk-feature,#shopify-section-{{ section.id }} .bk-grid.two{grid-template-columns:1fr}#shopify-section-{{ section.id }} .bk-grid{grid-template-columns:repeat(2,minmax(0,1fr))}#shopify-section-{{ section.id }} .bk-grid.three{grid-template-columns:1fr}}
+    @media(max-width:640px){#shopify-section-{{ section.id }} .bk-wrap{width:min(100% - 24px,1180px)}#shopify-section-{{ section.id }} .bk-title{font-size:clamp(42px,15vw,68px)}#shopify-section-{{ section.id }} .bk-actions,#shopify-section-{{ section.id }} .bk-btn{width:100%}#shopify-section-{{ section.id }} .bk-grid,#shopify-section-{{ section.id }} .bk-fields{grid-template-columns:1fr}#shopify-section-{{ section.id }} .bk-media,#shopify-section-{{ section.id }} .bk-feature-img{min-height:310px}#shopify-section-{{ section.id }} .bk-sticky{position:fixed;left:8px;right:8px;bottom:8px;z-index:20;display:grid;grid-template-columns:repeat(4,1fr);gap:6px;padding:7px;border:1px solid var(--line);border-radius:8px;background:rgba(0,0,0,.88)}#shopify-section-{{ section.id }} .bk-sticky a{display:flex;align-items:center;justify-content:center;min-height:42px;border-radius:6px;background:var(--gold);color:var(--black);font-size:11px;font-weight:950;text-decoration:none;text-transform:uppercase}#shopify-section-{{ section.id }} .bk-sticky a:nth-child(2){background:var(--green);color:var(--white)}#shopify-section-{{ section.id }} .bk-sticky a:nth-child(4){background:var(--black);color:var(--gold);border:1px solid var(--gold)}}
+  </style>
+
+  <div class='bk-wrap bk-hero'>
+    <div>
+      <span class='bk-kicker'>{{ section.settings.eyebrow }}</span>
+      <h1 class='bk-title'>{{ section.settings.hero_heading }}</h1>
+      <p class='bk-lead'>{{ section.settings.hero_text }}</p>
+      <div class='bk-actions'>
+        <a class='bk-btn' href='{{ booking_url }}'>{{ section.settings.primary_cta }}</a>
+        <a class='bk-btn green' href='{{ menu_url }}'>Request a Custom Menu</a>
+        <a class='bk-btn dark' href='{{ shop_url }}'>Shop Signature Spices</a>
+        <a class='bk-btn' href='{{ community_url }}'>Join The One Pot Family</a>
+      </div>
+    </div>
+    <div class='bk-card'>
+      <div class='bk-media'>
+        {% if section.settings.hero_image != blank %}{{ section.settings.hero_image | image_url: width: 1200 | image_tag: loading: 'eager', alt: section.settings.hero_image.alt | default: 'Chef Briscoe catering and spices' }}{% endif %}
+        <div class='bk-badge'><strong>{{ section.settings.hero_product }}</strong><span>Flavor-forward catering, custom menus, spice drops, virtual classes, and community.</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class='bk-strip'><div>{% for i in (1..2) %}<span>Washington DC Catering</span><span>Private Chef Washington DC</span><span>Corporate Catering DC</span><span>Custom Event Catering DMV</span><span>Signature Spice Blends</span><span>Virtual Cooking Classes</span><span>The One Pot Family</span>{% endfor %}</div></div>
+
+  <div class='bk-wrap'>
+    <div class='bk-block'>
+      <div class='bk-head'><h2>Catering, spices, classes, and community with one bold flavor system.</h2><p>Chef Jason Briscoe brings warm hospitality, culturally rich flavor, and professional event planning into every path: book the event, build the menu, shop the seasoning, reserve the class, and stay connected after the meal.</p></div>
+      <div class='bk-grid'>
+        <article class='bk-tile'><h3>Full-Service Catering</h3><p>Custom event catering for weddings, celebrations, VIP dinners, receptions, and milestone gatherings across Washington, D.C. and the DMV.</p><a href='{{ booking_url }}'>Book a consultation</a></article>
+        <article class='bk-tile'><h3>Drop-Off & Corporate</h3><p>Flavor-packed menus for office lunches, team events, client meetings, celebrations, and recurring corporate catering DC needs.</p><a href='{{ menu_url }}'>Plan an order</a></article>
+        <article class='bk-tile'><h3>Signature Spices</h3><p>Chef Briscoe blends, rubs, sampler packs, gift boxes, and recipe guides built for memorable home cooking.</p><a href='{{ shop_url }}'>Shop spices</a></article>
+        <article class='bk-tile'><h3>Classes & Community</h3><p>Virtual cooking classes, private group sessions, member recipes, early spice drops, replays, and The One Pot Family perks.</p><a href='{{ classes_url }}'>Reserve a class</a></article>
+      </div>
+    </div>
+
+    <div class='bk-block'>
+      <div class='bk-feature'>
+        <div class='bk-feature-img'>{% if section.settings.product_image != blank %}{{ section.settings.product_image | image_url: width: 1200 | image_tag: loading: 'lazy', alt: section.settings.hero_product }}{% endif %}</div>
+        <div class='bk-feature-body'><span class='bk-kicker'>Default Hero Product</span><h2>{{ section.settings.hero_product }}</h2><p class='bk-copy' style='margin-top:14px'>A premium house blend sampler built for everyday meals, event hosts, gift buyers, and fans of Chef Briscoe's flavor-forward cooking.</p><div class='bk-actions'><a class='bk-btn' href='{{ shop_url }}'>Try the Sampler Pack</a><a class='bk-btn green' href='{{ community_url }}'>Join the Spice Club</a></div><div class='bk-tags'><span>Flavor Story</span><span>Best Uses</span><span>Suggested Recipes</span><span>Pairings</span><span>Gift Boxes</span><span>Subscriptions</span></div></div>
+      </div>
+    </div>
+
+    <div class='bk-block'>
+      <div class='bk-head'><h2>Custom event catering DMV guests remember.</h2><p>Menus are customized by event type, guest count, location, flavor direction, budget range, dietary needs, and service style. Final availability, pricing, deposits, and allergy accommodations are confirmed by staff.</p></div>
+      <div class='bk-grid three'>
+        <article class='bk-tile'><h3>Private Chef Events</h3><p>Elevated intimate dining for birthdays, anniversaries, date nights, family gatherings, VIP dinners, and small celebrations.</p><a href='{{ booking_url }}'>Start an inquiry</a></article>
+        <article class='bk-tile'><h3>Corporate Catering DC</h3><p>Team lunches, recurring office meals, client events, staff appreciation, delivery, setup, and corporate class experiences.</p><a href='{{ booking_url }}'>Plan corporate catering</a></article>
+        <article class='bk-tile'><h3>Weddings & Celebrations</h3><p>Reception menus, rehearsal dinners, engagement parties, graduations, retirement parties, holidays, and milestone moments.</p><a href='{{ menu_url }}'>Request celebration menu</a></article>
+      </div>
+    </div>
+
+    <div class='bk-block'>
+      <div class='bk-grid two'>
+        {% form 'contact', class: 'bk-form' %}<input type='hidden' name='contact[Source]' value='Chef Briscoe catering inquiry'><h2>Catering Inquiry</h2>{{ form.errors | default_errors }}{% if form.posted_successfully? %}<p class='bk-copy'>Thank you. The team will review your event details and follow up.</p>{% endif %}<div class='bk-fields'><input name='contact[Full name]' placeholder='Full name' required><input name='contact[Phone]' placeholder='Phone number'><input type='email' name='contact[email]' placeholder='Email address' required><input name='contact[Event type]' placeholder='Event type'><input type='date' name='contact[Event date]' aria-label='Event date'><input name='contact[Guest count]' placeholder='Guest count'><input name='contact[Event location]' placeholder='Event location / venue'><input name='contact[Budget range]' placeholder='Budget range'></div><textarea name='contact[body]' placeholder='Cuisine direction, allergies/dietary needs, staffing/setup needs, urgency, and notes'></textarea><button class='bk-btn' type='submit'>Request a Custom Menu</button>{% endform %}
+        {% form 'contact', class: 'bk-form' %}<input type='hidden' name='contact[Source]' value='Chef Briscoe product class membership interest'><h2>Spices, Classes & Membership</h2>{{ form.errors | default_errors }}{% if form.posted_successfully? %}<p class='bk-copy'>Thank you. We received your interest.</p>{% endif %}<div class='bk-fields'><input name='contact[Full name]' placeholder='Full name' required><input type='email' name='contact[email]' placeholder='Email address' required><input name='contact[Product interest]' placeholder='Product interest'><input name='contact[Favorite flavor profile]' placeholder='Favorite flavor profile'><input name='contact[Class interest]' placeholder='Class interest'><input name='contact[Membership tier]' placeholder='Membership tier interest'></div><textarea name='contact[body]' placeholder='Preferred class topic, subscription interest, community interest, and recipe/product preferences'></textarea><button class='bk-btn green' type='submit'>Join The One Pot Family</button>{% endform %}
+      </div>
+    </div>
+
+    <div class='bk-block'><div class='bk-local'><h2>Washington DC catering, private chef dining, and signature spice blends for the DMV.</h2><p>Chef Briscoe serves event hosts, corporate planners, families, home cooks, and culinary community members with custom event catering DMV menus, private chef Washington DC experiences, virtual cooking classes, and bright signature spice blends.</p><div class='bk-actions'><a class='bk-btn' href='{{ booking_url }}'>Start Planning Your Event</a><a class='bk-btn dark' href='{{ shop_url }}'>Shop Signature Spices</a></div></div></div>
+
+    <div class='bk-block'>
+      <div class='bk-head'><h2>Clear answers before the consultation.</h2><p>Final booking details, pricing, menu approval, deposits, delivery/setup, and dietary accommodations are confirmed by staff.</p></div>
+      <details open><summary>How soon should I request catering?</summary><p>Submit your inquiry as early as possible so the team can review availability, guest count, service style, staffing, delivery needs, and menu direction.</p></details>
+      <details><summary>Are menus and prices final online?</summary><p>No. Final menu, pricing, availability, deposit requirements, and booking approval are confirmed after staff review and proposal.</p></details>
+      <details><summary>Can you accommodate dietary needs?</summary><p>Guests must disclose allergies and dietary needs before final menu approval. The team will review what can be accommodated before confirming the menu.</p></details>
+    </div>
+  </div>
+
+  <nav class='bk-sticky' aria-label='Mobile quick actions'><a href='{{ phone_href }}'>Call</a><a href='{{ booking_url }}'>Book</a><a href='{{ shop_url }}'>Shop</a><a href='{{ section.settings.message_url | default: booking_url }}'>Message</a></nav>
+</section>
+
+{% schema %}
+{
+  "name": "Chef Briscoe Bold",
+  "tag": "section",
+  "class": "section-chef-briscoe-bold",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Briscoe's Kitchen & Spice / Chef Briscoe" },
+    { "type": "inline_richtext", "id": "hero_heading", "label": "Hero heading", "default": "Bold Flavor. <strong>Jamaican Fire.</strong> Premium Catering." },
+    { "type": "textarea", "id": "hero_text", "label": "Hero text", "default": "Washington, D.C. / DMV catering, private chef events, signature spice products, virtual cooking classes, and The One Pot Family built around warm hospitality and unforgettable flavor." },
+    { "type": "text", "id": "primary_cta", "label": "Primary CTA", "default": "Book a Catering Consultation" },
+    { "type": "text", "id": "hero_product", "label": "Hero product name", "default": "Chef Briscoe Signature Spice Blend Collection / House Blend Sampler Pack" },
+    { "type": "image_picker", "id": "hero_image", "label": "Hero image" },
+    { "type": "image_picker", "id": "product_image", "label": "Product image" },
+    { "type": "url", "id": "booking_url", "label": "Booking URL" },
+    { "type": "url", "id": "menu_url", "label": "Menu URL" },
+    { "type": "url", "id": "shop_url", "label": "Shop URL" },
+    { "type": "url", "id": "classes_url", "label": "Classes URL" },
+    { "type": "url", "id": "community_url", "label": "Community URL" },
+    { "type": "url", "id": "message_url", "label": "Message URL" },
+    { "type": "text", "id": "phone", "label": "Phone", "default": "+1 202 555 0100" }
+  ],
+  "presets": [
+    { "name": "Chef Briscoe Bold" }
+  ]
+}
+{% endschema %}
