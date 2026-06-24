@@ -1,0 +1,21 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Briscoe's Kitchen & Spice",
+    "theme_version": "1.0.0",
+    "theme_author": "Codex",
+    "theme_documentation_url": "https://shopify.dev/docs/storefronts/themes",
+    "theme_support_url": "https://help.shopify.com/"
+  },
+  {
+    "name": "Brand",
+    "settings": [
+      {
+        "type": "text",
+        "id": "brand_tagline",
+        "label": "Brand tagline",
+        "default": "Bold Jamaican-inspired flavor for catering, spices, classes, and community."
+      }
+    ]
+  }
+]
