@@ -1,0 +1,11 @@
+{
+  "sections": {
+    "main": {
+      "type": "chef-briscoe-jamaican-bold",
+      "settings": {}
+    }
+  },
+  "order": [
+    "main"
+  ]
+}
