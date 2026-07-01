@@ -1,1 +1,13 @@
-test
+<section class="bk-section" style="background:#f7f2e8;color:#111;padding:58px 0;border-top:6px solid #050505;">
+  <div class="bk-wrap">
+    <p class="bk-kicker" style="color:#007a3d;">{{ section.settings.kicker }}</p>
+    <h2 class="bk-title" style="color:#050505;">{{ section.settings.heading }}</h2>
+    {% if section.settings.body != blank %}<p class="bk-body" style="max-width:850px;margin-top:14px;">{{ section.settings.body }}</p>{% endif %}
+    <div class="bk-benefit-grid">
+      {% for block in section.blocks %}<div class="bk-benefit" {{ block.shopify_attributes }}>{% if block.settings.icon != blank %}{{ block.settings.icon | image_url: width: 120 | image_tag: loading: 'lazy', alt: block.settings.heading }}{% endif %}<h3>{{ block.settings.heading }}</h3><p>{{ block.settings.text }}</p></div>{% endfor %}
+    </div>
+  </div>
+</section>
+{% schema %}
+{"name":"BK Product Benefits","tag":"section","settings":[{"type":"text","id":"kicker","label":"Kicker","default":"Why It Works"},{"type":"text","id":"heading","label":"Heading","default":"Big Flavor, Everyday Use"},{"type":"textarea","id":"body","label":"Body","default":"Island Gold is built for the meals you already love, from weeknight dinners to weekend cookouts."}],"blocks":[{"type":"benefit","name":"Benefit card","settings":[{"type":"image_picker","id":"icon","label":"Icon/image"},{"type":"text","id":"heading","label":"Heading","default":"Chef-Driven Flavor"},{"type":"textarea","id":"text","label":"Text","default":"Inspired by real kitchen work, family meals, catering, and bold island-style cooking."}]}],"presets":[{"name":"BK Product Benefits","blocks":[{"type":"benefit","settings":{"heading":"Big Flavor, Everyday Use","text":"Made for meals you already love, from weeknight dinners to weekend cookouts."}},{"type":"benefit","settings":{"heading":"Built For More Than One Dish","text":"Use it across proteins, sides, soups, vegetables, marinades, and grilled favorites."}},{"type":"benefit","settings":{"heading":"Chef-Driven Flavor","text":"Inspired by real kitchen work, family meals, catering, and bold island-style cooking."}},{"type":"benefit","settings":{"heading":"Easy Product Checkout","text":"Order your favorite Briscoe's Kitchen & Spice products directly from the official product shop."}}]}]}
+{% endschema %}
