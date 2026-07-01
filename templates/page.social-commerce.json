@@ -17,22 +17,5 @@
     "footer": { "type": "bk-footer", "settings": {} },
     "mobile_actions": { "type": "bk-mobile-sticky-actions", "settings": {} }
   },
-  "order": [
-    "announcement",
-    "header",
-    "hero",
-    "trust_marquee",
-    "featured_product",
-    "benefits",
-    "catalog",
-    "use_it_on",
-    "recipes",
-    "catering",
-    "shipping",
-    "signup",
-    "partnerships",
-    "faq",
-    "footer",
-    "mobile_actions"
-  ]
+  "order": ["announcement","header","hero","trust_marquee","featured_product","benefits","catalog","use_it_on","recipes","catering","shipping","signup","partnerships","faq","footer","mobile_actions"]
 }

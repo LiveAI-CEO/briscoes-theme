@@ -1,0 +1,19 @@
+<section class="bk-section bk-trust-marquee" aria-label="Product shop trust bar">
+  <div class="bk-marquee-track">
+    {% for i in (1..2) %}
+      {% for block in section.blocks %}<span {{ block.shopify_attributes }}>{{ block.settings.text }}</span>{% endfor %}
+    {% endfor %}
+  </div>
+</section>
+
+<style>
+  #shopify-section-{{ section.id }} .bk-trust-marquee{background:#ffb900;color:#050505;border-bottom:6px solid #050505;overflow:hidden;}
+  #shopify-section-{{ section.id }} .bk-marquee-track{display:flex;width:max-content;animation:bkMove-{{ section.id }} 24s linear infinite;white-space:nowrap;}
+  #shopify-section-{{ section.id }} span{display:inline-flex;align-items:center;gap:20px;padding:14px 22px;font-size:clamp(22px,2.8vw,38px);line-height:1;text-transform:uppercase;}
+  #shopify-section-{{ section.id }} span::after{content:"";width:12px;height:12px;border-radius:50%;background:#050505;}
+  @keyframes bkMove-{{ section.id }}{to{transform:translateX(-50%);}}
+</style>
+
+{% schema %}
+{"name":"BK Trust Marquee","tag":"section","blocks":[{"type":"item","name":"Trust item","settings":[{"type":"text","id":"text","label":"Text","default":"Official Product Shop"}]}],"presets":[{"name":"BK Trust Marquee","blocks":[{"type":"item","settings":{"text":"Official Product Shop"}},{"type":"item","settings":{"text":"Secure Product Checkout"}},{"type":"item","settings":{"text":"Ships From The U.S."}},{"type":"item","settings":{"text":"Recipe-Friendly Flavor"}},{"type":"item","settings":{"text":"Catering & Chef Services Available"}}]}]}
+{% endschema %}

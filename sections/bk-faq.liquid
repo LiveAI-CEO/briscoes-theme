@@ -1,0 +1,10 @@
+<section class="bk-section" style="background:#f7f2e8;color:#111;padding:58px 0;border-top:6px solid #050505;">
+  <div class="bk-wrap">
+    <p class="bk-kicker" style="color:#007a3d;">{{ section.settings.kicker }}</p>
+    <h2 class="bk-title" style="color:#050505;">{{ section.settings.heading }}</h2>
+    <div class="bk-faq-grid">{% for block in section.blocks %}<div class="bk-faq-item" {{ block.shopify_attributes }}><h3>{{ block.settings.question }}</h3><p>{{ block.settings.answer }}</p></div>{% endfor %}</div>
+  </div>
+</section>
+{% schema %}
+{"name":"BK FAQ","tag":"section","settings":[{"type":"text","id":"kicker","label":"Kicker","default":"Questions"},{"type":"text","id":"heading","label":"Heading","default":"Before You Checkout"}],"blocks":[{"type":"faq","name":"FAQ item","settings":[{"type":"text","id":"question","label":"Question","default":"What is Island Gold?"},{"type":"textarea","id":"answer","label":"Answer","default":"Island Gold is Briscoe's Kitchen & Spice all-purpose seasoning for everyday flavor."}]}],"presets":[{"name":"BK FAQ","blocks":[{"type":"faq","settings":{"question":"What is Island Gold?","answer":"Island Gold is Briscoe's Kitchen & Spice all-purpose seasoning for everyday flavor."}},{"type":"faq","settings":{"question":"Where do orders ship from?","answer":"Orders ship from the United States."}},{"type":"faq","settings":{"question":"Do you offer international shipping?","answer":"Selected international shipping is available where supported by checkout and carrier rules."}},{"type":"faq","settings":{"question":"Can I order catering here?","answer":"Product checkout happens here. Catering and chef services route to the custom Briscoe experience."}},{"type":"faq","settings":{"question":"Do you offer bulk or gift orders?","answer":"Use the contact or partnership path for special quantity, gifting, or custom order needs."}},{"type":"faq","settings":{"question":"How do I get recipes?","answer":"Use the recipes or One Pot Family links for flavor inspiration and updates."}}]}]}
+{% endschema %}

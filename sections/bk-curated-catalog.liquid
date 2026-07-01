@@ -1,0 +1,14 @@
+<section class="bk-section" style="background:#050505;color:#fff;padding:58px 0;border-top:6px solid #050505;">
+  <div class="bk-wrap">
+    <p class="bk-kicker">{{ section.settings.kicker }}</p>
+    <h2 class="bk-title">{{ section.settings.heading }}</h2>
+    <p class="bk-body" style="max-width:900px;margin-top:14px;color:#ffd050;">{{ section.settings.body }}</p>
+    <div class="bk-card-grid">
+      {% for block in section.blocks %}<a class="bk-card bk-catalog-card" href="{{ block.settings.url }}" {{ block.shopify_attributes }}>{% if block.settings.image != blank %}{{ block.settings.image | image_url: width: 700 | image_tag: loading: 'lazy', alt: block.settings.title }}{% endif %}<div><h3>{{ block.settings.title }}</h3><p>{{ block.settings.subtitle }}</p></div></a>{% endfor %}
+    </div>
+  </div>
+</section>
+<style>#shopify-section-{{ section.id }} .bk-catalog-card{background:#f7f2e8;color:#050505;min-height:220px;display:flex;flex-direction:column;}#shopify-section-{{ section.id }} .bk-catalog-card img{width:100%;aspect-ratio:1.25/1;object-fit:cover;border-bottom:5px solid #050505;}#shopify-section-{{ section.id }} .bk-catalog-card div{padding:18px;}#shopify-section-{{ section.id }} .bk-catalog-card h3{font-size:clamp(26px,2.8vw,40px);line-height:.9;color:#007a3d;text-transform:uppercase;}#shopify-section-{{ section.id }} .bk-catalog-card p{margin-top:8px;font-family:Arial,sans-serif;font-weight:900;line-height:1.25;}</style>
+{% schema %}
+{"name":"BK Curated Catalog","tag":"section","settings":[{"type":"text","id":"kicker","label":"Kicker","default":"Product Shop"},{"type":"text","id":"heading","label":"Heading","default":"Flavor Essentials Built For Direct Checkout"},{"type":"textarea","id":"body","label":"Body","default":"Shop seasonings, bundles, recipe add-ons, merch, and select Briscoe's Kitchen & Spice drops."}],"blocks":[{"type":"card","name":"Catalog card","settings":[{"type":"image_picker","id":"image","label":"Image"},{"type":"text","id":"title","label":"Title","default":"Island Gold"},{"type":"text","id":"subtitle","label":"Subtitle","default":"Signature all-purpose seasoning"},{"type":"url","id":"url","label":"URL"}]}],"presets":[{"name":"BK Curated Catalog","blocks":[{"type":"card","settings":{"title":"Island Gold","subtitle":"Signature all-purpose seasoning"}},{"type":"card","settings":{"title":"Single Bottle","subtitle":"Start with the official flavor drop"}},{"type":"card","settings":{"title":"2-Pack","subtitle":"Great for gifting and repeat cooking"}},{"type":"card","settings":{"title":"3-Pack","subtitle":"Stock up for cookouts and family plates"}}]}]}
+{% endschema %}

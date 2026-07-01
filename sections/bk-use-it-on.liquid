@@ -1,0 +1,13 @@
+<section class="bk-section" style="background:#007a3d;color:#fff;padding:58px 0;border-top:6px solid #050505;">
+  <div class="bk-wrap">
+    <p class="bk-kicker">{{ section.settings.kicker }}</p>
+    <h2 class="bk-title">{{ section.settings.heading }}</h2>
+    <p class="bk-body" style="max-width:820px;margin-top:14px;color:#ffd050;">{{ section.settings.body }}</p>
+    <div class="bk-use-grid">
+      {% for block in section.blocks %}<div class="bk-use-pill" {{ block.shopify_attributes }}>{{ block.settings.text }}</div>{% endfor %}
+    </div>
+  </div>
+</section>
+{% schema %}
+{"name":"BK Use It On","tag":"section","settings":[{"type":"text","id":"kicker","label":"Kicker","default":"Flavor Range"},{"type":"text","id":"heading","label":"Heading","default":"Use Island Gold On"},{"type":"textarea","id":"body","label":"Body","default":"Use Island Gold across proteins, sides, soups, vegetables, rice dishes, marinades, and everyday plates."}],"blocks":[{"type":"use","name":"Use case","settings":[{"type":"text","id":"text","label":"Text","default":"Chicken"}]}],"presets":[{"name":"BK Use It On","blocks":[{"type":"use","settings":{"text":"Chicken"}},{"type":"use","settings":{"text":"Fish"}},{"type":"use","settings":{"text":"Shrimp"}},{"type":"use","settings":{"text":"Vegetables"}},{"type":"use","settings":{"text":"Rice & Peas"}},{"type":"use","settings":{"text":"Soups"}}]}]}
+{% endschema %}

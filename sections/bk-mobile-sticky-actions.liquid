@@ -1,0 +1,7 @@
+<section class="bk-section bk-mobile-actions" aria-label="Mobile quick actions">
+  {% for block in section.blocks %}<a href="{{ block.settings.url }}" {{ block.shopify_attributes }}>{{ block.settings.label }}</a>{% endfor %}
+</section>
+<style>#shopify-section-{{ section.id }} .bk-mobile-actions{display:none;}@media(max-width:760px){#shopify-section-{{ section.id }} .bk-mobile-actions{position:fixed;left:0;right:0;bottom:0;z-index:50;display:grid;grid-template-columns:repeat(4,1fr);border-top:4px solid #050505;background:#050505;}#shopify-section-{{ section.id }} .bk-mobile-actions a{min-height:58px;display:grid;place-items:center;border-right:2px solid #050505;background:#ffb900;color:#050505;text-decoration:none;text-transform:uppercase;font-size:17px;line-height:1;}#shopify-section-{{ section.id }} .bk-mobile-actions a:nth-child(2){background:#007a3d;color:#ffd050;}#shopify-section-{{ section.id }} .bk-mobile-actions a:nth-child(4){background:#050505;color:#ffb900;}} </style>
+{% schema %}
+{"name":"BK Mobile Actions","tag":"section","blocks":[{"type":"action","name":"Action","settings":[{"type":"text","id":"label","label":"Label","default":"Shop"},{"type":"url","id":"url","label":"URL"}]}],"presets":[{"name":"BK Mobile Actions","blocks":[{"type":"action","settings":{"label":"Call"}},{"type":"action","settings":{"label":"Shop"}},{"type":"action","settings":{"label":"Recipes"}},{"type":"action","settings":{"label":"Catering"}}]}]}
+{% endschema %}

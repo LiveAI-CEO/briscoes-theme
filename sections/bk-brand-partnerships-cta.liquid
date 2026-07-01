@@ -1,0 +1,12 @@
+<section class="bk-section" style="background:#f7f2e8;color:#111;padding:58px 0;border-top:6px solid #050505;">
+  <div class="bk-wrap">
+    <p class="bk-kicker" style="color:#007a3d;">{{ section.settings.kicker }}</p>
+    <h2 class="bk-title" style="color:#050505;">{{ section.settings.heading }}</h2>
+    <p class="bk-body" style="max-width:900px;margin-top:14px;">{{ section.settings.body }}</p>
+    <div class="bk-detail-grid">{% for block in section.blocks %}<div class="bk-detail" {{ block.shopify_attributes }}><h3>{{ block.settings.heading }}</h3><p>{{ block.settings.text }}</p></div>{% endfor %}</div>
+    <div class="bk-actions"><a class="bk-btn" href="{{ section.settings.primary_url }}">{{ section.settings.primary_label }}</a><a class="bk-btn bk-btn--green" href="{{ section.settings.secondary_url }}">{{ section.settings.secondary_label }}</a></div>
+  </div>
+</section>
+{% schema %}
+{"name":"BK Brand Partnerships","tag":"section","settings":[{"type":"text","id":"kicker","label":"Kicker","default":"Brand Partnerships"},{"type":"text","id":"heading","label":"Heading","default":"Partner With Briscoe's Kitchen & Spice"},{"type":"textarea","id":"body","label":"Body","default":"Interested in sponsored recipes, product drops, event partnerships, content collaborations, package inserts, retail opportunities, or shoppable media campaigns?"},{"type":"text","id":"primary_label","label":"Primary label","default":"Partner With Briscoe"},{"type":"url","id":"primary_url","label":"Primary URL"},{"type":"text","id":"secondary_label","label":"Secondary label","default":"Request Partnership Info"},{"type":"url","id":"secondary_url","label":"Secondary URL"}],"blocks":[{"type":"option","name":"Partnership option","settings":[{"type":"text","id":"heading","label":"Heading","default":"Sponsored Recipes"},{"type":"textarea","id":"text","label":"Text","default":"Feature aligned products inside recipe content and shoppable campaigns."}]}],"presets":[{"name":"BK Brand Partnerships","blocks":[{"type":"option","settings":{"heading":"Sponsored Recipes","text":"Feature aligned products inside recipe content and shoppable campaigns."}},{"type":"option","settings":{"heading":"Product Drops","text":"Create seasonal product-drop moments with direct checkout paths."}},{"type":"option","settings":{"heading":"Event Partnerships","text":"Connect brand partners to catering, festival, chef, and live experience moments."}}]}]}
+{% endschema %}
