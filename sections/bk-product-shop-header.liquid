@@ -1,0 +1,32 @@
+<section class="bk-section bk-product-shop-header">
+  <div class="bk-wrap bk-header-inner">
+    <a class="bk-logo" href="{{ routes.root_url }}">
+      {% if section.settings.logo != blank %}
+        {{ section.settings.logo | image_url: width: 360 | image_tag: loading: 'eager', alt: section.settings.brand_name }}
+      {% else %}
+        <span class="bk-mark">{{ section.settings.logo_mark }}</span><span>{{ section.settings.brand_name }}</span>
+      {% endif %}
+    </a>
+    <nav class="bk-header-links" aria-label="Product shop navigation">
+      {% if section.settings.menu != blank %}
+        {% for link in section.settings.menu.links %}<a href="{{ link.url }}">{{ link.title }}</a>{% endfor %}
+      {% else %}
+        <a href="{{ section.settings.shop_url }}">Shop</a><a href="{{ section.settings.recipes_url }}">Recipes</a><a href="{{ section.settings.catering_url }}">Catering</a><a href="{{ section.settings.chef_services_url }}">Chef Services</a><a href="{{ section.settings.partnership_url }}">Brand Partnerships</a><a href="{{ section.settings.contact_url }}">Contact</a>
+      {% endif %}
+    </nav>
+    {% if section.settings.show_cart %}<a class="bk-header-cart" href="{{ routes.cart_url }}">Cart</a>{% endif %}
+  </div>
+</section>
+
+<style>
+  #shopify-section-{{ section.id }} .bk-product-shop-header{background:linear-gradient(180deg,#00a352,#007a3d);border-bottom:4px solid #050505;}
+  #shopify-section-{{ section.id }} .bk-header-inner{min-height:68px;display:flex;align-items:center;justify-content:space-between;gap:18px;}
+  #shopify-section-{{ section.id }} .bk-header-links{display:flex;align-items:center;gap:clamp(12px,1.7vw,22px);font-size:clamp(15px,1.45vw,21px);line-height:1;}
+  #shopify-section-{{ section.id }} .bk-header-links a{color:#ffd050;text-decoration:none;text-transform:uppercase;text-shadow:2px 2px 0 rgba(0,0,0,.5);}
+  #shopify-section-{{ section.id }} .bk-header-cart{min-width:74px;min-height:44px;display:grid;place-items:center;border:3px solid #050505;border-radius:999px;background:#ffb900;color:#050505;text-decoration:none;text-transform:uppercase;box-shadow:0 4px 0 rgba(0,0,0,.55);}
+  @media(max-width:990px){#shopify-section-{{ section.id }} .bk-header-links{display:none;}}
+</style>
+
+{% schema %}
+{"name":"BK Product Shop Header","tag":"section","settings":[{"type":"image_picker","id":"logo","label":"Logo image"},{"type":"text","id":"brand_name","label":"Fallback brand name","default":"Briscoe's Kitchen & Spice"},{"type":"text","id":"logo_mark","label":"Fallback logo mark","default":"B"},{"type":"link_list","id":"menu","label":"Navigation menu"},{"type":"checkbox","id":"show_cart","label":"Show cart","default":true},{"type":"url","id":"shop_url","label":"Shop URL"},{"type":"url","id":"recipes_url","label":"Recipes URL"},{"type":"url","id":"catering_url","label":"Catering URL"},{"type":"url","id":"chef_services_url","label":"Chef services URL"},{"type":"url","id":"partnership_url","label":"Brand partnerships URL"},{"type":"url","id":"contact_url","label":"Contact URL"}],"presets":[{"name":"BK Product Shop Header"}]}
+{% endschema %}
