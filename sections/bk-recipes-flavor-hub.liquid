@@ -1,0 +1,11 @@
+<section class="bk-section" style="background:#f7f2e8;color:#111;padding:58px 0;border-top:6px solid #050505;">
+  <div class="bk-wrap" style="text-align:center;">
+    <p class="bk-kicker" style="color:#007a3d;">{{ section.settings.kicker }}</p>
+    <h2 class="bk-title" style="color:#050505;">{{ section.settings.heading }}</h2>
+    <p class="bk-body" style="max-width:820px;margin:14px auto 0;">{{ section.settings.body }}</p>
+    <div class="bk-actions" style="justify-content:center;"><a class="bk-btn" href="{{ section.settings.primary_url }}">{{ section.settings.primary_label }}</a><a class="bk-btn bk-btn--green" href="{{ section.settings.secondary_url }}">{{ section.settings.secondary_label }}</a></div>
+  </div>
+</section>
+{% schema %}
+{"name":"BK Recipes Flavor Hub","tag":"section","settings":[{"type":"text","id":"kicker","label":"Kicker","default":"Flavor Hub"},{"type":"text","id":"heading","label":"Heading","default":"Need A Little Inspiration?"},{"type":"textarea","id":"body","label":"Body","default":"Get recipes, flavor ideas, kitchen tips, and serving inspiration from Briscoe's Kitchen & Spice."},{"type":"text","id":"primary_label","label":"Primary label","default":"Explore Recipes"},{"type":"url","id":"primary_url","label":"Primary URL"},{"type":"text","id":"secondary_label","label":"Secondary label","default":"Join The One Pot Family"},{"type":"url","id":"secondary_url","label":"Secondary URL"}],"presets":[{"name":"BK Recipes Flavor Hub"}]}
+{% endschema %}
