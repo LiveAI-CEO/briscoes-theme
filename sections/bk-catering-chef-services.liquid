@@ -1,0 +1,11 @@
+<section class="bk-section bk-flag-bg" style="color:#fff;padding:58px 0;border-top:6px solid #050505;">
+  <div class="bk-wrap">
+    <p class="bk-kicker">{{ section.settings.kicker }}</p>
+    <h2 class="bk-title">{{ section.settings.heading }}</h2>
+    <p class="bk-body" style="max-width:900px;margin-top:14px;color:#ffd050;">{{ section.settings.body }}</p>
+    <div class="bk-actions"><a class="bk-btn" href="{{ section.settings.catering_url }}">{{ section.settings.catering_label }}</a><a class="bk-btn bk-btn--green" href="{{ section.settings.quote_url }}">{{ section.settings.quote_label }}</a><a class="bk-btn bk-btn--dark" href="{{ section.settings.services_url }}">{{ section.settings.services_label }}</a></div>
+  </div>
+</section>
+{% schema %}
+{"name":"BK Catering Services","tag":"section","settings":[{"type":"text","id":"kicker","label":"Kicker","default":"Events & Chef Services"},{"type":"text","id":"heading","label":"Heading","default":"Need Briscoe's Kitchen & Spice For An Event?"},{"type":"textarea","id":"body","label":"Body","default":"Catering and chef services are custom, personal, and planned around your event. Product orders stay simple here; custom service requests route to the full Briscoe experience."},{"type":"text","id":"catering_label","label":"Catering button","default":"Book Catering"},{"type":"url","id":"catering_url","label":"Catering URL"},{"type":"text","id":"quote_label","label":"Quote button","default":"Request A Custom Quote"},{"type":"url","id":"quote_url","label":"Quote URL"},{"type":"text","id":"services_label","label":"Services button","default":"Explore Chef Services"},{"type":"url","id":"services_url","label":"Services URL"}],"presets":[{"name":"BK Catering Services"}]}
+{% endschema %}
