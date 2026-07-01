@@ -1,1 +1,14 @@
-test
+<section class="bk-section" style="background:#050505;color:#fff;padding:58px 0;border-top:6px solid #050505;">
+  <div class="bk-wrap" style="text-align:center;">
+    <p class="bk-kicker">{{ section.settings.kicker }}</p>
+    <h2 class="bk-title">{{ section.settings.heading }}</h2>
+    <p class="bk-body" style="max-width:820px;margin:14px auto 0;color:#ffd050;">{{ section.settings.body }}</p>
+    <div class="bk-signup" style="margin-top:28px;">
+      <a class="bk-btn" href="{{ section.settings.signup_url }}">{{ section.settings.button_label }}</a>
+    </div>
+    <p class="bk-body" style="max-width:820px;margin:18px auto 0;font-size:14px;color:#ffd050;">{{ section.settings.disclaimer }}</p>
+  </div>
+</section>
+{% schema %}
+{"name":"BK One Pot Signup","tag":"section","settings":[{"type":"text","id":"kicker","label":"Kicker","default":"The One Pot Family"},{"type":"text","id":"heading","label":"Heading","default":"Get The Drops, Recipes, And Flavor First"},{"type":"textarea","id":"body","label":"Body","default":"Join The One Pot Family for restock alerts, recipes, product drops, chef updates, and flavor inspiration."},{"type":"url","id":"signup_url","label":"Signup URL"},{"type":"text","id":"button_label","label":"Button label","default":"Join The Family"},{"type":"textarea","id":"disclaimer","label":"Disclaimer","default":"By submitting through the connected signup page, you agree to receive updates from Briscoe's Kitchen & Spice. Message and data rates may apply if SMS is enabled."}],"presets":[{"name":"BK One Pot Signup"}]}
+{% endschema %}
