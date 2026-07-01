@@ -1,0 +1,21 @@
+{
+  "sections": {
+    "announcement": { "type": "bk-announcement-bar", "settings": {} },
+    "header": { "type": "bk-product-shop-header", "settings": {} },
+    "hero": { "type": "bk-hero-product-drop", "settings": {} },
+    "trust_marquee": { "type": "bk-trust-marquee", "settings": {} },
+    "featured_product": { "type": "bk-featured-product-pack-selector", "settings": {} },
+    "benefits": { "type": "bk-product-benefits", "settings": {} },
+    "catalog": { "type": "bk-curated-catalog", "settings": {} },
+    "use_it_on": { "type": "bk-use-it-on", "settings": {} },
+    "recipes": { "type": "bk-recipes-flavor-hub", "settings": {} },
+    "catering": { "type": "bk-catering-chef-services", "settings": {} },
+    "shipping": { "type": "bk-shipping-international", "settings": {} },
+    "signup": { "type": "bk-one-pot-family-signup", "settings": {} },
+    "partnerships": { "type": "bk-brand-partnerships-cta", "settings": {} },
+    "faq": { "type": "bk-faq", "settings": {} },
+    "footer": { "type": "bk-footer", "settings": {} },
+    "mobile_actions": { "type": "bk-mobile-sticky-actions", "settings": {} }
+  },
+  "order": ["announcement","header","hero","trust_marquee","featured_product","benefits","catalog","use_it_on","recipes","catering","shipping","signup","partnerships","faq","footer","mobile_actions"]
+}
