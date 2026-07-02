@@ -1,0 +1,54 @@
+<section class="bk-section bk-collection-products" style="background:{{ section.settings.background }};color:{{ section.settings.text_color }};padding:58px 0;border-top:6px solid #050505;">
+  <div class="bk-wrap">
+    <p class="bk-kicker" style="color:{{ section.settings.kicker_color }};">{{ section.settings.kicker }}</p>
+    <h2 class="bk-title">{{ section.settings.heading }}</h2>
+    {% if section.settings.body != blank %}<p class="bk-body" style="max-width:900px;margin-top:14px;color:{{ section.settings.body_color }};">{{ section.settings.body }}</p>{% endif %}
+    {% assign product_collection = section.settings.collection %}
+    {% if product_collection != blank and product_collection.products_count > 0 %}
+      <div class="bk-product-grid">
+        {% for product in product_collection.products limit: section.settings.max_products %}
+          <a class="bk-product-card" href="{{ product.url }}">
+            <div class="bk-product-card-media">
+              {% if product.featured_image != blank %}
+                {{ product.featured_image | image_url: width: 800 | image_tag: loading: 'lazy', alt: product.featured_image.alt | default: product.title }}
+              {% else %}
+                <div class="bk-product-card-placeholder">{{ product.title | slice: 0, 2 }}</div>
+              {% endif %}
+            </div>
+            <div class="bk-product-card-copy">
+              <h3>{{ product.title }}</h3>
+              <p>{{ product.description | strip_html | truncate: 145 }}</p>
+              <strong>{% if product.price_varies %}From {{ product.price_min | money }}{% else %}{{ product.price | money }}{% endif %}</strong>
+            </div>
+          </a>
+        {% endfor %}
+      </div>
+    {% else %}
+      <div class="bk-product-grid bk-product-grid--fallback">
+        {% for block in section.blocks %}
+          <a class="bk-product-card" href="{{ block.settings.url }}" {{ block.shopify_attributes }}>
+            <div class="bk-product-card-media bk-product-card-placeholder">{{ block.settings.title | slice: 0, 2 }}</div>
+            <div class="bk-product-card-copy"><h3>{{ block.settings.title }}</h3><p>{{ block.settings.text }}</p><strong>{{ block.settings.price }}</strong></div>
+          </a>
+        {% endfor %}
+      </div>
+    {% endif %}
+    {% if section.settings.cta_label != blank %}<div class="bk-actions"><a class="bk-btn" href="{{ section.settings.cta_url }}">{{ section.settings.cta_label }}</a></div>{% endif %}
+  </div>
+</section>
+<style>
+  #shopify-section-{{ section.id }} .bk-product-grid{display:grid;grid-template-columns:repeat({{ section.settings.columns_desktop }},1fr);gap:18px;margin-top:30px;}
+  #shopify-section-{{ section.id }} .bk-product-card{display:flex;flex-direction:column;border:5px solid #050505;border-radius:14px;overflow:hidden;background:#f7f2e8;color:#050505;text-decoration:none;box-shadow:0 8px 0 rgba(0,0,0,.32);}
+  #shopify-section-{{ section.id }} .bk-product-card-media{aspect-ratio:1/1;display:grid;place-items:center;background:radial-gradient(circle at 30% 35%,rgba(255,185,0,.42),transparent 24%),#f5e6be;border-bottom:5px solid #050505;}
+  #shopify-section-{{ section.id }} .bk-product-card-media img{width:100%;height:100%;object-fit:cover;display:block;}
+  #shopify-section-{{ section.id }} .bk-product-card-placeholder{display:grid;place-items:center;color:#ffb900;background:#050505;font-size:44px;line-height:1;text-transform:uppercase;}
+  #shopify-section-{{ section.id }} .bk-product-card-copy{padding:18px;display:grid;gap:8px;}
+  #shopify-section-{{ section.id }} .bk-product-card h3{color:#007a3d;font-size:clamp(24px,2.6vw,36px);line-height:.92;text-transform:uppercase;}
+  #shopify-section-{{ section.id }} .bk-product-card p{font-family:Arial,sans-serif;font-weight:900;font-size:14px;line-height:1.28;}
+  #shopify-section-{{ section.id }} .bk-product-card strong{color:#050505;font-size:clamp(24px,2.5vw,34px);line-height:1;text-transform:uppercase;}
+  @media(max-width:990px){#shopify-section-{{ section.id }} .bk-product-grid{grid-template-columns:repeat(2,1fr);}}
+  @media(max-width:640px){#shopify-section-{{ section.id }} .bk-product-grid{grid-template-columns:1fr;}}
+</style>
+{% schema %}
+{"name":"BK Product Collection","tag":"section","settings":[{"type":"collection","id":"collection","label":"Product collection"},{"type":"text","id":"kicker","label":"Kicker","default":"Shop The Drop"},{"type":"text","id":"heading","label":"Heading","default":"Briscoe Product Collection"},{"type":"textarea","id":"body","label":"Body","default":"Shop official Briscoe's Kitchen & Spice products powered by the live Shopify catalog."},{"type":"range","id":"max_products","label":"Max products","min":2,"max":16,"step":1,"default":8},{"type":"range","id":"columns_desktop","label":"Desktop columns","min":2,"max":4,"step":1,"default":4},{"type":"text","id":"cta_label","label":"CTA label","default":"Shop Collection"},{"type":"url","id":"cta_url","label":"CTA URL"},{"type":"color","id":"background","label":"Background","default":"#f7f2e8"},{"type":"color","id":"text_color","label":"Text color","default":"#111111"},{"type":"color","id":"kicker_color","label":"Kicker color","default":"#007a3d"},{"type":"color","id":"body_color","label":"Body color","default":"#111111"}],"blocks":[{"type":"fallback_product","name":"Fallback product","settings":[{"type":"text","id":"title","label":"Title","default":"Official Product"},{"type":"textarea","id":"text","label":"Text","default":"A Briscoe's Kitchen & Spice product ready for catalog mapping."},{"type":"text","id":"price","label":"Price","default":"Shop now"},{"type":"url","id":"url","label":"URL"}]}],"presets":[{"name":"BK Product Collection"}]}
+{% endschema %}
