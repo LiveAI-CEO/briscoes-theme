@@ -7,10 +7,11 @@
     {% if product_collection != blank and product_collection.products_count > 0 %}
       <div class="bk-product-grid">
         {% for product in product_collection.products limit: section.settings.max_products %}
+          {% assign product_card_alt = product.featured_image.alt | default: product.title %}
           <a class="bk-product-card" href="{{ product.url }}">
             <div class="bk-product-card-media">
               {% if product.featured_image != blank %}
-                {{ product.featured_image | image_url: width: 800 | image_tag: loading: 'lazy', alt: product.featured_image.alt | default: product.title }}
+                {{ product.featured_image | image_url: width: 800 | image_tag: loading: 'lazy', alt: product_card_alt }}
               {% else %}
                 <div class="bk-product-card-placeholder">{{ product.title | slice: 0, 2 }}</div>
               {% endif %}
