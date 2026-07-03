@@ -1,9 +1,13 @@
 <section class="bk-section bk-catalog-feature" style="background:{{ section.settings.background }};color:{{ section.settings.text_color }};padding:58px 0;border-top:6px solid #050505;">
   {% assign feature_product = section.settings.product %}
+  {% assign feature_alt = section.settings.heading %}
+  {% if feature_product != blank and feature_product.featured_image != blank %}
+    {% assign feature_alt = feature_product.featured_image.alt | default: feature_product.title %}
+  {% endif %}
   <div class="bk-wrap bk-catalog-feature-grid">
     <div class="bk-catalog-feature-media">
       {% if feature_product != blank and feature_product.featured_image != blank %}
-        {{ feature_product.featured_image | image_url: width: 1100 | image_tag: loading: 'lazy', alt: feature_product.featured_image.alt | default: feature_product.title }}
+        {{ feature_product.featured_image | image_url: width: 1100 | image_tag: loading: 'lazy', alt: feature_alt }}
       {% elsif section.settings.image != blank %}
         {{ section.settings.image | image_url: width: 1100 | image_tag: loading: 'lazy', alt: section.settings.heading }}
       {% else %}
