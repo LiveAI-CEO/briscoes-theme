@@ -3,8 +3,19 @@
     "announcement": {
       "type": "bk-announcement-bar",
       "settings": {
-        "text": "Island Gold is back - shop seasonings, merch, cookbook drops, recipe postcards, and official Briscoe flavor gear.",
-        "link": "/collections/all"
+        "text": "🔥 Island Gold is officially sold out. Join the priority restock list for first access.",
+        "link": "https://briscoeskitchen.com/one-pot-family",
+        "icon": "🔥",
+        "tone": "default"
+      }
+    },
+    "announcement_secondary": {
+      "type": "bk-announcement-bar",
+      "settings": {
+        "text": "Welcome to The One Pot Family — recipes, island flavor, and chef-led experiences.",
+        "link": "https://briscoeskitchen.com/one-pot-family",
+        "icon": "👨🏽‍🍳",
+        "tone": "accent"
       }
     },
     "header": {
@@ -13,38 +24,57 @@
         "brand_name": "Briscoe's Kitchen & Spice",
         "logo_mark": "BK",
         "show_cart": true,
+        "shop_label": "Shop",
         "shop_url": "/collections/all",
+        "seasonings_label": "Seasonings",
+        "seasonings_url": "/collections/all",
+        "recipe_cards_label": "Recipe Cards",
+        "recipe_cards_url": "/collections/recipe-cards-postcards",
+        "cookbooks_label": "Cookbooks",
+        "cookbooks_url": "/products/simple-recipes-cookbook-collectors-postcard",
+        "gift_sets_label": "Gift Sets",
+        "gift_sets_url": "/collections/gift-bundles",
+        "lifestyle_label": "Briscoe Lifestyle",
+        "lifestyle_url": "/collections/merch",
+        "recipes_label": "Recipes",
         "recipes_url": "https://briscoeskitchen.com/recipes",
+        "chef_label": "Meet Chef Briscoe",
+        "chef_url": "https://briscoeskitchen.com/contact",
+        "private_dining_label": "Private Dining",
+        "private_dining_url": "https://briscoeskitchen.com/catering",
+        "catering_label": "Catering & Events",
         "catering_url": "https://briscoeskitchen.com/catering",
-        "chef_services_url": "https://briscoeskitchen.com/chef-services",
-        "partnership_url": "https://briscoeskitchen.com/brand-partnerships",
-        "contact_url": "https://briscoeskitchen.com/contact"
+        "wholesale_label": "Wholesale",
+        "wholesale_url": "https://briscoeskitchen.com/contact",
+        "join_label": "Join the One Pot Family",
+        "join_url": "https://briscoeskitchen.com/one-pot-family"
       }
     },
     "hero": {
       "type": "bk-hero-product-drop",
       "settings": {
-        "kicker": "Official Product Shop",
-        "heading": "Bold Island Flavor. <strong>Built For The Whole Table.</strong>",
-        "body": "Shop Briscoe's Kitchen & Spice seasonings, official merch, cookbook tools, recipe postcards, and giftable product drops. Seasoning is the flavor. Merch is the identity. The cookbook and postcards keep the plates moving.",
-        "primary_label": "Shop Island Gold",
-        "primary_url": "/products/island-gold-all-purpose-seasoning",
-        "secondary_label": "Shop Merch",
-        "secondary_url": "/collections/merch",
-        "tertiary_label": "Book Catering",
-        "tertiary_url": "https://briscoeskitchen.com/catering"
+        "badge_text": "Chef-led • Small-batch • Priority access",
+        "kicker": "Chef Briscoe | Island Flavor",
+        "heading": "Island Flavor. <strong>Chef-Crafted.</strong> Made for Your Kitchen.",
+        "body": "Bring bold Caribbean flavor home with Chef Jason Briscoe's signature seasonings, collectible recipes, and unforgettable culinary experiences.",
+        "primary_label": "Join the Island Gold Restock List",
+        "primary_url": "https://briscoeskitchen.com/one-pot-family",
+        "secondary_label": "Explore Chef Briscoe's Recipes",
+        "secondary_url": "https://briscoeskitchen.com/recipes",
+        "tertiary_label": "Meet Chef Briscoe",
+        "tertiary_url": "https://briscoeskitchen.com/contact"
       }
     },
     "trust_marquee": {
       "type": "bk-trust-marquee",
       "settings": {},
       "blocks": {
-        "trust_1": { "type": "item", "settings": { "text": "Official Product Shop" } },
-        "trust_2": { "type": "item", "settings": { "text": "Real Product Images" } },
-        "trust_3": { "type": "item", "settings": { "text": "Seasonings + Merch" } },
-        "trust_4": { "type": "item", "settings": { "text": "Cookbook + Recipe Cards" } },
+        "trust_1": { "type": "item", "settings": { "text": "Chef-led flavor" } },
+        "trust_2": { "type": "item", "settings": { "text": "Small-batch drops" } },
+        "trust_3": { "type": "item", "settings": { "text": "Recipe-first storytelling" } },
+        "trust_4": { "type": "item", "settings": { "text": "Catering + events" } },
         "trust_5": { "type": "item", "settings": { "text": "Ships From The U.S." } },
-        "trust_6": { "type": "item", "settings": { "text": "Catering Available" } }
+        "trust_6": { "type": "item", "settings": { "text": "One Pot Family access" } }
       },
       "block_order": ["trust_1", "trust_2", "trust_3", "trust_4", "trust_5", "trust_6"]
     },
@@ -52,22 +82,19 @@
       "type": "bk-featured-product-pack-selector",
       "settings": {
         "product": "island-gold-all-purpose-seasoning",
-        "kicker": "Featured Flavor Drop",
+        "kicker": "Island Gold Sold Out — Again",
         "heading": "Briscoe's Island Gold All-Purpose Seasoning",
-        "subtitle": "The Soul of Island Cookin'",
-        "review_label": "Core flavor product",
-        "price_label": "Starting at $9.99",
-        "body": "Bold island-inspired all-purpose seasoning built for chicken, fish, shrimp, vegetables, rice and peas, soups, eggs, fries, grilled dishes, marinades, and everyday plates.",
-        "pack_label": "Choose Your Pack",
-        "shipping_note": "Ships from the United States. Selected international shipping is available where supported.",
-        "shop_url": "/products/island-gold-all-purpose-seasoning"
-      },
-      "blocks": {
-        "single": { "type": "pack", "settings": { "title": "Single Bottle", "description": "Perfect for first-time flavor lovers.", "price": "$9.99", "url": "/products/island-gold-all-purpose-seasoning" } },
-        "two": { "type": "pack", "settings": { "title": "2-Pack", "description": "Great for flavor lovers and gifting.", "price": "$14.99", "url": "/products/island-gold-all-purpose-seasoning" } },
-        "three": { "type": "pack", "settings": { "title": "3-Pack", "description": "Stock up for kitchen, cookouts, and family meals.", "price": "$24.99", "url": "/products/island-gold-all-purpose-seasoning" } }
-      },
-      "block_order": ["single", "two", "three"]
+        "subtitle": "Small-batch release. Priority access now open.",
+        "status_badge": "Priority restock list",
+        "body": "The seasoning that started the movement is currently sold out. Join Chef Briscoe's priority list and be the first to know when the next small-batch release drops.",
+        "notice_heading": "Island Gold Sold Out — Again",
+        "notice_text": "The seasoning that started the movement is currently sold out. Join Chef Briscoe's priority list and be the first to know when the next small-batch release drops.",
+        "shipping_note": "Small-batch drops, chef-led updates, and one-pot family recipes first.",
+        "cta_label": "Notify Me First",
+        "cta_url": "https://briscoeskitchen.com/one-pot-family",
+        "secondary_cta_label": "Explore Recipes",
+        "secondary_cta_url": "https://briscoeskitchen.com/recipes"
+      }
     },
     "benefits": {
       "type": "bk-product-benefits",
@@ -220,5 +247,5 @@
     "footer": { "type": "bk-footer", "settings": { "brand_name": "Briscoe's Kitchen & Spice", "logo_mark": "BK", "description": "Official product shop for Briscoe's Kitchen & Spice seasonings, merch, cookbook tools, recipe postcards, gift bundles, and select flavor drops." }, "blocks": { "shop": { "type": "column", "settings": { "heading": "Shop", "link_1_label": "Island Gold", "link_1_url": "/products/island-gold-all-purpose-seasoning", "link_2_label": "Merch", "link_2_url": "/collections/merch", "link_3_label": "Cart", "link_3_url": "/cart" } }, "print": { "type": "column", "settings": { "heading": "Print + Recipes", "link_1_label": "Cookbook", "link_1_url": "/products/simple-recipes-cookbook-collectors-postcard", "link_2_label": "Recipe Postcards", "link_2_url": "/collections/recipe-cards-postcards", "link_3_label": "Flavor Hub", "link_3_url": "https://briscoeskitchen.com/recipes" } }, "support": { "type": "column", "settings": { "heading": "Support", "link_1_label": "Contact", "link_1_url": "https://briscoeskitchen.com/contact", "link_2_label": "Shipping Policy", "link_2_url": "/policies/shipping-policy", "link_3_label": "Refund Policy", "link_3_url": "/policies/refund-policy" } } }, "block_order": ["shop", "print", "support"] },
     "mobile_actions": { "type": "bk-mobile-sticky-actions", "settings": {}, "blocks": { "m_shop": { "type": "action", "settings": { "label": "Shop", "url": "/collections/all" } }, "m_merch": { "type": "action", "settings": { "label": "Merch", "url": "/collections/merch" } }, "m_book": { "type": "action", "settings": { "label": "Cookbook", "url": "/products/simple-recipes-cookbook-collectors-postcard" } }, "m_catering": { "type": "action", "settings": { "label": "Catering", "url": "https://briscoeskitchen.com/catering" } } }, "block_order": ["m_shop", "m_merch", "m_book", "m_catering"] }
   },
-  "order": ["announcement", "header", "hero", "trust_marquee", "featured_product", "benefits", "catalog", "merch_collection", "cookbook_feature", "postcard_collection", "gift_bundle_collection", "use_it_on", "recipes", "catering", "shipping", "signup", "partnerships", "faq", "footer", "mobile_actions"]
+  "order": ["announcement", "announcement_secondary", "header", "hero", "trust_marquee", "featured_product", "benefits", "catalog", "merch_collection", "cookbook_feature", "postcard_collection", "gift_bundle_collection", "use_it_on", "recipes", "catering", "shipping", "signup", "partnerships", "faq", "footer", "mobile_actions"]
 }

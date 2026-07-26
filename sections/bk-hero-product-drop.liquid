@@ -1,13 +1,14 @@
 <section class="bk-section bk-hero-product-drop bk-flag-bg">
   <div class="bk-wrap bk-hero-grid">
     <div class="bk-hero-copy">
+      {% if section.settings.badge_text != blank %}<p class="bk-hero-badge">{{ section.settings.badge_text }}</p>{% endif %}
       <p class="bk-kicker">{{ section.settings.kicker }}</p>
       <h1 class="bk-hero-title">{{ section.settings.heading }}</h1>
       <p class="bk-hero-lead">{{ section.settings.body }}</p>
       <div class="bk-actions">
-        <a class="bk-btn" href="{{ section.settings.primary_url }}">{{ section.settings.primary_label }}</a>
-        <a class="bk-btn bk-btn--green" href="{{ section.settings.secondary_url }}">{{ section.settings.secondary_label }}</a>
-        <a class="bk-btn bk-btn--dark" href="{{ section.settings.tertiary_url }}">{{ section.settings.tertiary_label }}</a>
+        {% if section.settings.primary_url != blank %}<a class="bk-btn" href="{{ section.settings.primary_url }}">{{ section.settings.primary_label }}</a>{% endif %}
+        {% if section.settings.secondary_url != blank %}<a class="bk-btn bk-btn--green" href="{{ section.settings.secondary_url }}">{{ section.settings.secondary_label }}</a>{% endif %}
+        {% if section.settings.tertiary_url != blank %}<a class="bk-btn bk-btn--dark" href="{{ section.settings.tertiary_url }}">{{ section.settings.tertiary_label }}</a>{% endif %}
       </div>
     </div>
     <div class="bk-hero-art">
@@ -24,6 +25,7 @@
   #shopify-section-{{ section.id }} .bk-hero-product-drop{border-bottom:6px solid #050505;color:#fff;background-color:#050505;}
   #shopify-section-{{ section.id }} .bk-hero-grid{min-height:600px;display:grid;grid-template-columns:minmax(0,1fr) minmax(340px,.86fr);align-items:center;}
   #shopify-section-{{ section.id }} .bk-hero-copy{padding:clamp(34px,6vw,76px) 0;}
+  #shopify-section-{{ section.id }} .bk-hero-badge{display:inline-flex;width:fit-content;padding:8px 12px;border:2px solid #ffb900;border-radius:999px;background:rgba(255,185,0,.14);color:#ffd050;font-size:14px;line-height:1;text-transform:uppercase;letter-spacing:.08em;margin-bottom:12px;}
   #shopify-section-{{ section.id }} .bk-hero-title{max-width:820px;margin-top:12px;color:#fff;font-size:clamp(56px,8.6vw,124px);line-height:.78;text-transform:uppercase;text-shadow:0 6px 0 rgba(0,0,0,.7),0 16px 30px rgba(0,0,0,.6);}
   #shopify-section-{{ section.id }} .bk-hero-title strong{display:block;color:#ffb900;font-family:Georgia,"Times New Roman",serif;font-style:italic;font-weight:900;line-height:.9;text-transform:none;}
   #shopify-section-{{ section.id }} .bk-hero-lead{max-width:700px;margin-top:18px;color:#ffd050;font-family:Arial,sans-serif;font-size:clamp(18px,1.8vw,27px);line-height:1.2;font-weight:900;}
@@ -38,5 +40,5 @@
 </style>
 
 {% schema %}
-{"name":"BK Hero Product Drop","tag":"section","settings":[{"type":"text","id":"kicker","label":"Eyebrow","default":"Official Product Shop"},{"type":"inline_richtext","id":"heading","label":"Heading","default":"Bold Island Flavor. <strong>Shipped From The U.S.</strong>"},{"type":"textarea","id":"body","label":"Body copy","default":"Shop the official Briscoe's Kitchen & Spice product drop featuring Island Gold All-Purpose Seasoning, bundles, and select flavor essentials. Bring big flavor to everyday meals, family gatherings, cookouts, events, and weekend plates."},{"type":"image_picker","id":"image","label":"Hero image"},{"type":"text","id":"primary_label","label":"Primary button label","default":"Shop Island Gold"},{"type":"url","id":"primary_url","label":"Primary button URL"},{"type":"text","id":"secondary_label","label":"Secondary button label","default":"Explore Recipes"},{"type":"url","id":"secondary_url","label":"Secondary button URL"},{"type":"text","id":"tertiary_label","label":"Tertiary button label","default":"Book Catering"},{"type":"url","id":"tertiary_url","label":"Tertiary button URL"}],"presets":[{"name":"BK Hero Product Drop"}]}
+{"name":"BK Hero Product Drop","tag":"section","settings":[{"type":"text","id":"badge_text","label":"Badge text","default":"Chef-led • Small-batch • Priority access"},{"type":"text","id":"kicker","label":"Eyebrow","default":"Chef Briscoe | Island Flavor"},{"type":"inline_richtext","id":"heading","label":"Heading","default":"Island Flavor. <strong>Chef-Crafted.</strong> Made for Your Kitchen."},{"type":"textarea","id":"body","label":"Body copy","default":"Bring bold Caribbean flavor home with Chef Jason Briscoe's signature seasonings, collectible recipes, and unforgettable culinary experiences."},{"type":"image_picker","id":"image","label":"Hero image"},{"type":"text","id":"primary_label","label":"Primary button label","default":"Join the Island Gold Restock List"},{"type":"url","id":"primary_url","label":"Primary button URL"},{"type":"text","id":"secondary_label","label":"Secondary button label","default":"Explore Chef Briscoe's Recipes"},{"type":"url","id":"secondary_url","label":"Secondary button URL"},{"type":"text","id":"tertiary_label","label":"Tertiary button label","default":"Meet Chef Briscoe"},{"type":"url","id":"tertiary_url","label":"Tertiary button URL"}],"presets":[{"name":"BK Hero Product Drop"}]}
 {% endschema %}
