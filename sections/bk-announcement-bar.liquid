@@ -1,13 +1,19 @@
+{% liquid
+  assign announcement_link = section.settings.link
+  if section.settings.product != blank
+    assign announcement_link = section.settings.product.url
+  endif
+%}
 <section class="bk-section bk-announcement-bar{% if section.settings.tone == 'accent' %} bk-announcement-bar--accent{% endif %}">
   <div class="bk-wrap bk-announcement-bar__inner">
-    {% if section.settings.link != blank %}
-      <a href="{{ section.settings.link }}">
+    {% if announcement_link != blank %}
+      <a href="{{ announcement_link }}">
         {% if section.settings.icon != blank %}<span class="bk-announcement-icon">{{ section.settings.icon }}</span>{% endif %}
-        <span>{{ section.settings.text }}</span>
+        <span>{% if section.settings.product != blank and section.settings.product.available == false %}{{ section.settings.unavailable_text | escape }}{% else %}{{ section.settings.text | escape }}{% endif %}</span>
       </a>
     {% else %}
       {% if section.settings.icon != blank %}<span class="bk-announcement-icon">{{ section.settings.icon }}</span>{% endif %}
-      <span>{{ section.settings.text }}</span>
+      <span>{% if section.settings.product != blank and section.settings.product.available == false %}{{ section.settings.unavailable_text | escape }}{% else %}{{ section.settings.text | escape }}{% endif %}</span>
     {% endif %}
   </div>
 </section>
@@ -47,6 +53,61 @@
   }
 </style>
 
+
 {% schema %}
-{"name":"BK Announcement Bar","tag":"section","settings":[{"type":"text","id":"text","label":"Announcement text","default":"Island Gold is officially sold out. Join the priority restock list for first access."},{"type":"url","id":"link","label":"Optional link"},{"type":"text","id":"icon","label":"Optional icon","default":"🔥"},{"type":"select","id":"tone","label":"Tone","options":[{"value":"default","label":"Default"},{"value":"accent","label":"Highlight"}],"default":"default"}],"presets":[{"name":"BK Announcement Bar"}]}
+{
+  "name": "BK Announcement Bar",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "text",
+      "label": "Announcement text",
+      "default": "Island Gold is back. Bring Caribbean flavor to your kitchen."
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "Optional link"
+    },
+    {
+      "type": "text",
+      "id": "icon",
+      "label": "Optional icon",
+      "default": "\ud83d\udd25"
+    },
+    {
+      "type": "select",
+      "id": "tone",
+      "label": "Tone",
+      "options": [
+        {
+          "value": "default",
+          "label": "Default"
+        },
+        {
+          "value": "accent",
+          "label": "Highlight"
+        }
+      ],
+      "default": "default"
+    },
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Availability product"
+    },
+    {
+      "type": "text",
+      "id": "unavailable_text",
+      "label": "Unavailable message",
+      "default": "Explore Island Gold and find your next favorite flavor."
+    }
+  ],
+  "presets": [
+    {
+      "name": "BK Announcement Bar"
+    }
+  ]
+}
 {% endschema %}

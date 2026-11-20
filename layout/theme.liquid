@@ -26,10 +26,12 @@
   {% endif %}
 
   {{ 'theme.css' | asset_url | stylesheet_tag }}
+  {{ 'bk-commerce.css' | asset_url | stylesheet_tag }}
+  <script src="{{ 'bk-commerce.js' | asset_url }}" defer></script>
   {{ content_for_header }}
 
   <!-- Placeholder for future theme JS -->
-  {{ 'theme.js' | asset_url | script_tag }}
+  <script src="{{ 'theme.js' | asset_url }}" defer></script>
 </head>
 
 <body>

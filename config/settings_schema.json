@@ -17,5 +17,54 @@
         "default": "Bold Jamaican-inspired flavor for catering, spices, classes, and community."
       }
     ]
+  },
+  {
+    "name": "Color schemes",
+    "settings": [
+      {
+        "type": "color_scheme_group",
+        "id": "color_schemes",
+        "definition": [
+          {
+            "type": "color",
+            "id": "background",
+            "label": "Background",
+            "default": "#050505"
+          },
+          {
+            "type": "color",
+            "id": "text",
+            "label": "Text",
+            "default": "#ffffff"
+          },
+          {
+            "type": "color",
+            "id": "accent",
+            "label": "Accent",
+            "default": "#ffd050"
+          },
+          {
+            "type": "color_background",
+            "id": "background_gradient",
+            "label": "Background gradient"
+          }
+        ],
+        "role": {
+          "text": "text",
+          "background": {
+            "solid": "background",
+            "gradient": "background_gradient"
+          },
+          "primary_button": "accent",
+          "on_primary_button": "background",
+          "primary_button_border": "accent",
+          "secondary_button": "background",
+          "on_secondary_button": "text",
+          "secondary_button_border": "text",
+          "links": "accent",
+          "icons": "text"
+        }
+      }
+    ]
   }
 ]

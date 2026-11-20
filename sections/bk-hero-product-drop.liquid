@@ -6,7 +6,7 @@
       <h1 class="bk-hero-title">{{ section.settings.heading }}</h1>
       <p class="bk-hero-lead">{{ section.settings.body }}</p>
       <div class="bk-actions">
-        {% if section.settings.primary_url != blank %}<a class="bk-btn" href="{{ section.settings.primary_url }}">{{ section.settings.primary_label }}</a>{% endif %}
+        {% if section.settings.product != blank %}<a class="bk-btn" href="{{ section.settings.product.url }}">{{ section.settings.primary_label | escape }}</a>{% elsif section.settings.primary_url != blank %}<a class="bk-btn" href="{{ section.settings.primary_url }}">{{ section.settings.primary_label }}</a>{% endif %}
         {% if section.settings.secondary_url != blank %}<a class="bk-btn bk-btn--green" href="{{ section.settings.secondary_url }}">{{ section.settings.secondary_label }}</a>{% endif %}
         {% if section.settings.tertiary_url != blank %}<a class="bk-btn bk-btn--dark" href="{{ section.settings.tertiary_url }}">{{ section.settings.tertiary_label }}</a>{% endif %}
       </div>
@@ -14,6 +14,8 @@
     <div class="bk-hero-art">
       {% if section.settings.image != blank %}
         {{ section.settings.image | image_url: width: 1100 | image_tag: loading: 'eager', alt: section.settings.heading }}
+      {% elsif section.settings.product.featured_image != blank %}
+        {{ section.settings.product.featured_image | image_url: width: 1100 | image_tag: loading: 'eager', fetchpriority: 'high', widths: '360, 600, 900, 1100', sizes: '(min-width: 990px) 45vw, 100vw' }}
       {% else %}
         <div class="bk-product-stack"><span class="bk-spice-swoosh"></span><div class="bk-bottle"><div class="bk-label">Island<br>Gold<small>Briscoe's Kitchen & Spice</small></div></div></div>
       {% endif %}
@@ -39,6 +41,84 @@
   @media(max-width:990px){#shopify-section-{{ section.id }} .bk-hero-grid{grid-template-columns:1fr;}#shopify-section-{{ section.id }} .bk-hero-art{min-height:auto;}}
 </style>
 
+
 {% schema %}
-{"name":"BK Hero Product Drop","tag":"section","settings":[{"type":"text","id":"badge_text","label":"Badge text","default":"Chef-led • Small-batch • Priority access"},{"type":"text","id":"kicker","label":"Eyebrow","default":"Chef Briscoe | Island Flavor"},{"type":"inline_richtext","id":"heading","label":"Heading","default":"Island Flavor. <strong>Chef-Crafted.</strong> Made for Your Kitchen."},{"type":"textarea","id":"body","label":"Body copy","default":"Bring bold Caribbean flavor home with Chef Jason Briscoe's signature seasonings, collectible recipes, and unforgettable culinary experiences."},{"type":"image_picker","id":"image","label":"Hero image"},{"type":"text","id":"primary_label","label":"Primary button label","default":"Join the Island Gold Restock List"},{"type":"url","id":"primary_url","label":"Primary button URL"},{"type":"text","id":"secondary_label","label":"Secondary button label","default":"Explore Chef Briscoe's Recipes"},{"type":"url","id":"secondary_url","label":"Secondary button URL"},{"type":"text","id":"tertiary_label","label":"Tertiary button label","default":"Meet Chef Briscoe"},{"type":"url","id":"tertiary_url","label":"Tertiary button URL"}],"presets":[{"name":"BK Hero Product Drop"}]}
+{
+  "name": "BK Hero Product Drop",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Hero product"
+    },
+    {
+      "type": "text",
+      "id": "badge_text",
+      "label": "Badge text",
+      "default": "Chef Briscoe \u2022 Island flavor"
+    },
+    {
+      "type": "text",
+      "id": "kicker",
+      "label": "Eyebrow",
+      "default": "Chef Briscoe | Island Flavor"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Big Island Flavor. <strong>Everyday Cooking.</strong>"
+    },
+    {
+      "type": "textarea",
+      "id": "body",
+      "label": "Body copy",
+      "default": "Bring Chef Briscoe\u2019s Island Gold All-Purpose Seasoning to your kitchen."
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Hero image"
+    },
+    {
+      "type": "text",
+      "id": "primary_label",
+      "label": "Primary button label",
+      "default": "Shop Island Gold"
+    },
+    {
+      "type": "url",
+      "id": "primary_url",
+      "label": "Primary button URL"
+    },
+    {
+      "type": "text",
+      "id": "secondary_label",
+      "label": "Secondary button label",
+      "default": "Explore Chef Briscoe's Recipes"
+    },
+    {
+      "type": "url",
+      "id": "secondary_url",
+      "label": "Secondary button URL"
+    },
+    {
+      "type": "text",
+      "id": "tertiary_label",
+      "label": "Tertiary button label",
+      "default": "Meet Chef Briscoe"
+    },
+    {
+      "type": "url",
+      "id": "tertiary_url",
+      "label": "Tertiary button URL"
+    }
+  ],
+  "presets": [
+    {
+      "name": "BK Hero Product Drop"
+    }
+  ]
+}
 {% endschema %}

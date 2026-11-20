@@ -1,27 +1,255 @@
-<section class="bk-section" style="background:#050505;color:#fff;padding:58px 0;border-top:6px solid #050505;">
-  <div class="bk-wrap" style="text-align:center;">
-    <p class="bk-kicker">{{ section.settings.kicker }}</p>
-    <h2 class="bk-title">{{ section.settings.heading }}</h2>
-    <p class="bk-body" style="max-width:820px;margin:14px auto 0;color:#ffd050;">{{ section.settings.body }}</p>
-    <div class="bk-signup" style="margin-top:28px;">
-      {% if section.settings.signup_url != blank %}
-        <a class="bk-btn" href="{{ section.settings.signup_url }}">{{ section.settings.button_label }}</a>
-      {% else %}
-        {% form 'customer', class: 'bk-family-signup-form' %}
-          <input type="hidden" name="contact[tags]" value="newsletter, one-pot-family">
-          <label for="bk-family-email-{{ section.id }}" style="display:block;margin-bottom:8px;">Email address</label>
-          <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:12px;">
-            <input id="bk-family-email-{{ section.id }}" name="contact[email]" type="email" autocomplete="email" required placeholder="Email address" style="min-width:min(100%,260px);flex:1 1 260px;max-width:430px;min-height:48px;padding:10px;border:2px solid #fed100;border-radius:6px;color:#111;background:#fff;">
-            <button class="bk-btn" type="submit">{{ section.settings.button_label }}</button>
-          </div>
-          {% if form.posted_successfully? %}<p role="status" style="margin-top:12px;">Thanks for joining the family.</p>{% endif %}
-          {% if form.errors %}<div role="alert">{{ form.errors | default_errors }}</div>{% endif %}
-        {% endform %}
-      {% endif %}
+{% liquid
+  assign form_id = 'OnePotFamily-' | append: section.id
+  assign scheme = settings.color_schemes[section.settings.color_scheme]
+  assign has_image = false
+  if section.settings.show_image and section.settings.image != blank
+    assign has_image = true
+  endif
+%}
+{% if section.settings.navigation_anchor %}<div id="one-pot-family"></div>{% endif %}
+<section id="OnePotFamilySection-{{ section.id }}" class="bk-section opf opf--{{ section.settings.layout }} opf--{{ section.settings.image_placement }}{% if has_image %} opf--has-image{% endif %}" style="--opf-bg:{{ scheme.settings.background | default: '#050505' }};--opf-text:{{ scheme.settings.text | default: '#ffffff' }};--opf-accent:{{ scheme.settings.accent | default: '#ffd050' }};--opf-width:{{ section.settings.content_width }}px;--opf-align:{{ section.settings.alignment }};--opf-top:{{ section.settings.padding_top }}px;--opf-bottom:{{ section.settings.padding_bottom }}px" aria-labelledby="{{ form_id }}-heading">
+  <div class="bk-wrap opf__grid">
+    {% if has_image %}<div class="opf__image">{{ section.settings.image | image_url: width: 1200 | image_tag: loading: 'lazy', widths: '360, 600, 900, 1200', sizes: '(min-width: 800px) 50vw, 100vw' }}</div>{% endif %}
+    <div class="opf__content">
+      {% if section.settings.kicker != blank %}<p class="bk-kicker">{{ section.settings.kicker | escape }}</p>{% endif %}
+      <h2 id="{{ form_id }}-heading" class="bk-title">{{ section.settings.heading | escape }}</h2>
+      <p class="bk-body opf__body">{{ section.settings.body | escape }}</p>
+      {% if section.blocks.size > 0 %}<ul class="opf__benefits">{% for block in section.blocks %}<li {{ block.shopify_attributes }}>{{ block.settings.text | escape }}</li>{% endfor %}</ul>{% endif %}
+      {% form 'customer', id: form_id, class: 'opf__form' %}
+        <input type="hidden" name="contact[tags]" value="newsletter,{{ section.settings.source_tag | escape }}">
+        <label for="{{ form_id }}-email">{{ section.settings.email_label | escape }}</label>
+        <div class="opf__row">
+          <input id="{{ form_id }}-email" type="email" name="contact[email]" value="{{ form.email | escape }}" autocomplete="email" autocorrect="off" autocapitalize="off" required placeholder="{{ section.settings.placeholder | escape }}" aria-describedby="{{ form_id }}-consent{% if form.errors %} {{ form_id }}-errors{% endif %}"{% if form.errors %} aria-invalid="true" autofocus{% endif %}>
+          <button type="submit" class="bk-btn{% if section.settings.button_style == 'green' %} bk-btn--green{% elsif section.settings.button_style == 'dark' %} bk-btn--dark{% endif %}">{{ section.settings.button_label | escape }}</button>
+        </div>
+        <p id="{{ form_id }}-consent" class="opf__consent">{{ section.settings.disclaimer | escape }}</p>
+        {% if form.errors %}<div id="{{ form_id }}-errors" class="opf__feedback" role="alert" tabindex="-1">{{ form.errors | default_errors }}</div>{% endif %}
+        {% if form.posted_successfully? %}<p id="{{ form_id }}-success" class="opf__feedback" role="status" tabindex="-1" autofocus>{{ section.settings.success_message | escape }}{% if section.settings.double_opt_in %} {{ section.settings.confirmation_message | escape }}{% endif %}</p>{% endif %}
+      {% endform %}
     </div>
-    <p class="bk-body" style="max-width:820px;margin:18px auto 0;font-size:14px;color:#ffd050;">{{ section.settings.disclaimer }}</p>
   </div>
 </section>
+
+
+
 {% schema %}
-{"name":"BK One Pot Signup","tag":"section","settings":[{"type":"text","id":"kicker","label":"Kicker","default":"The One Pot Family"},{"type":"text","id":"heading","label":"Heading","default":"Get The Drops, Recipes, And Flavor First"},{"type":"textarea","id":"body","label":"Body","default":"Join The One Pot Family for restock alerts, recipes, product drops, chef updates, and flavor inspiration."},{"type":"url","id":"signup_url","label":"Signup URL"},{"type":"text","id":"button_label","label":"Button label","default":"Join The Family"},{"type":"textarea","id":"disclaimer","label":"Disclaimer","default":"By submitting through the connected signup page, you agree to receive updates from Briscoe's Kitchen & Spice. Message and data rates may apply if SMS is enabled."}],"presets":[{"name":"BK One Pot Signup"}]}
+{
+  "name": "One Pot Family Signup",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "kicker",
+      "label": "Eyebrow",
+      "default": "The One Pot Family"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Join the One Pot Family"
+    },
+    {
+      "type": "textarea",
+      "id": "body",
+      "label": "Description",
+      "default": "Bring more flavor to the table. Sign up for recipes, cooking inspiration, and the latest from Chef Briscoe\u2014including new products and special offers."
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Join the One Pot Family"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_image",
+      "label": "Show image",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "image_placement",
+      "label": "Image placement",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Layout",
+      "options": [
+        {
+          "value": "stacked",
+          "label": "Stacked"
+        },
+        {
+          "value": "split",
+          "label": "Split"
+        }
+      ],
+      "default": "split"
+    },
+    {
+      "type": "range",
+      "id": "content_width",
+      "label": "Content width",
+      "min": 600,
+      "max": 1400,
+      "step": 20,
+      "unit": "px",
+      "default": 1180
+    },
+    {
+      "type": "text_alignment",
+      "id": "alignment",
+      "label": "Text alignment",
+      "default": "left"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "dark"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top spacing",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 56
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom spacing",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 56
+    },
+    {
+      "type": "select",
+      "id": "button_style",
+      "label": "Button style",
+      "options": [
+        {
+          "value": "gold",
+          "label": "Gold"
+        },
+        {
+          "value": "green",
+          "label": "Green"
+        },
+        {
+          "value": "dark",
+          "label": "Dark"
+        }
+      ],
+      "default": "gold"
+    },
+    {
+      "type": "text",
+      "id": "email_label",
+      "label": "Email label",
+      "default": "Email address"
+    },
+    {
+      "type": "text",
+      "id": "placeholder",
+      "label": "Email placeholder",
+      "default": "Your email address"
+    },
+    {
+      "type": "textarea",
+      "id": "disclaimer",
+      "label": "Consent text",
+      "default": "By signing up, you agree to receive marketing emails from Briscoe\u2019s Kitchen & Spice. Unsubscribe anytime."
+    },
+    {
+      "type": "textarea",
+      "id": "success_message",
+      "label": "Success message",
+      "default": "Thanks for joining the One Pot Family! Check your inbox for any confirmation request and updates from Chef Briscoe."
+    },
+    {
+      "type": "text",
+      "id": "source_tag",
+      "label": "Signup-source tag",
+      "default": "one-pot-family"
+    },
+    {
+      "type": "checkbox",
+      "id": "double_opt_in",
+      "label": "Show confirmation-required message",
+      "info": "Match Settings > Notifications > Customer notifications > Marketing double opt-in. This controls copy only; Shopify controls consent.",
+      "default": false
+    },
+    {
+      "type": "textarea",
+      "id": "confirmation_message",
+      "label": "Confirmation message",
+      "default": "Please confirm your email subscription using the link in your inbox."
+    },
+    {
+      "type": "checkbox",
+      "id": "navigation_anchor",
+      "label": "Use as homepage signup navigation target",
+      "info": "Enable on only one signup section. Form and field IDs always stay unique.",
+      "default": false
+    }
+  ],
+  "blocks": [
+    {
+      "type": "benefit",
+      "name": "Benefit",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Benefit text",
+          "default": "Recipes and cooking inspiration"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "One Pot Family Signup",
+      "blocks": [
+        {
+          "type": "benefit",
+          "settings": {
+            "text": "Recipes and cooking inspiration"
+          }
+        },
+        {
+          "type": "benefit",
+          "settings": {
+            "text": "New products and special offers"
+          }
+        }
+      ]
+    }
+  ]
+}
 {% endschema %}

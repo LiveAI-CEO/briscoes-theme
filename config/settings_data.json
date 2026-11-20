@@ -1,12 +1,27 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
-  "current": {}
+  "current": {
+    "color_schemes": {
+      "dark": {
+        "settings": {
+          "background": "#050505",
+          "text": "#ffffff",
+          "accent": "#ffd050"
+        }
+      },
+      "cream": {
+        "settings": {
+          "background": "#f7f2e8",
+          "text": "#111111",
+          "accent": "#007a3d"
+        }
+      },
+      "green": {
+        "settings": {
+          "background": "#007a3d",
+          "text": "#ffffff",
+          "accent": "#ffd050"
+        }
+      }
+    }
+  }
 }

@@ -1,7 +1,6 @@
 {% liquid
   assign active_variant = product.selected_or_first_available_variant
   assign product_form_id = 'bk-product-form-' | append: section.id
-  assign signup_form_id = 'bk-signup-' | append: section.id
 %}
 
 <section class="bk-main-product" aria-label="Product details">
@@ -64,25 +63,7 @@
       </div>
     {% endif %}
 
-    {% if section.settings.show_newsletter %}
-      <div class="bk-main-product__newsletter">
-        <h2>Join The One Pot Family</h2>
-        <p>Get seasoning drops, recipes, and Briscoe's Kitchen &amp; Spice updates.</p>
-        {% form 'customer', id: signup_form_id %}
-          <input type="hidden" name="contact[tags]" value="newsletter, social-commerce, spice-drop, one-pot-family">
-          <label for="{{ signup_form_id }}-email">Email address</label>
-          <div class="bk-main-product__signup-row">
-            <input id="{{ signup_form_id }}-email" name="contact[email]" type="email" autocomplete="email" required>
-            <button type="submit">Join the family</button>
-          </div>
-          <label for="{{ signup_form_id }}-phone">Phone (optional)</label>
-          <input id="{{ signup_form_id }}-phone" name="contact[phone]" type="tel" autocomplete="tel">
-          {% if form.posted_successfully? %}<p role="status">Thank you for signing up.</p>{% endif %}
-          {% if form.errors %}<div role="alert">{{ form.errors | default_errors }}</div>{% endif %}
-        {% endform %}
-        <p class="bk-main-product__disclaimer">By joining, you agree to receive updates from Briscoe's Kitchen &amp; Spice. You can unsubscribe anytime.</p>
-      </div>
-    {% endif %}
+
   </div>
 </section>
 
@@ -141,7 +122,7 @@
   "settings": [
     { "type": "checkbox", "id": "show_vendor", "label": "Show vendor", "default": false },
     { "type": "checkbox", "id": "show_description", "label": "Show description", "default": true },
-    { "type": "checkbox", "id": "show_newsletter", "label": "Show One Pot Family signup", "default": true }
+    { "type": "checkbox", "id": "show_newsletter", "label": "Show One Pot Family signup", "default": false }
   ],
   "blocks": [ { "type": "@app" } ],
   "presets": [ { "name": "BK Main Product" } ]

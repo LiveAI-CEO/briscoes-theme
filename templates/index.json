@@ -1,44 +1,100 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
   "sections": {
-    "announcement": { "type": "bk-announcement-bar", "settings": {} },
-    "header": { "type": "bk-product-shop-header", "settings": {} },
-    "hero": { "type": "bk-hero-product-drop", "settings": {} },
-    "trust_marquee": { "type": "bk-trust-marquee", "settings": {} },
-    "featured_product": { "type": "bk-featured-product-pack-selector", "settings": {} },
-    "benefits": { "type": "bk-product-benefits", "settings": {} },
-    "catalog": { "type": "bk-curated-catalog", "settings": {} },
-    "use_it_on": { "type": "bk-use-it-on", "settings": {} },
-    "recipes": { "type": "bk-recipes-flavor-hub", "settings": {} },
-    "catering": { "type": "bk-catering-chef-services", "settings": {} },
-    "shipping": { "type": "bk-shipping-international", "settings": {} },
-    "signup": { "type": "bk-one-pot-family-signup", "settings": {} },
-    "partnerships": { "type": "bk-brand-partnerships-cta", "settings": {} },
-    "faq": { "type": "bk-faq", "settings": {} },
-    "footer": { "type": "bk-footer", "settings": {} },
-    "mobile_actions": { "type": "bk-mobile-sticky-actions", "settings": {} }
+    "announcement": {
+      "type": "bk-announcement-bar",
+      "settings": {
+        "product": "island-gold-all-purpose-seasoning",
+        "text": "Island Gold is back. Bring Caribbean flavor to your kitchen."
+      }
+    },
+    "header": {
+      "type": "bk-product-shop-header",
+      "settings": {
+        "join_url": "/#one-pot-family"
+      }
+    },
+    "hero": {
+      "type": "bk-hero-product-drop",
+      "settings": {
+        "product": "island-gold-all-purpose-seasoning",
+        "badge_text": "Chef Briscoe \u2022 Island flavor",
+        "heading": "Big Island Flavor. <strong>Everyday Cooking.</strong>",
+        "body": "Bring Chef Briscoe\u2019s Island Gold All-Purpose Seasoning to your kitchen.",
+        "primary_label": "Shop Island Gold"
+      }
+    },
+    "trust_marquee": {
+      "type": "bk-trust-marquee",
+      "settings": {}
+    },
+    "featured_product": {
+      "type": "bk-featured-product-pack-selector",
+      "settings": {
+        "product": "island-gold-all-purpose-seasoning"
+      }
+    },
+    "benefits": {
+      "type": "bk-product-benefits",
+      "settings": {}
+    },
+    "catalog": {
+      "type": "bk-curated-catalog",
+      "settings": {}
+    },
+    "use_it_on": {
+      "type": "bk-use-it-on",
+      "settings": {}
+    },
+    "recipes": {
+      "type": "bk-recipes-flavor-hub",
+      "settings": {
+        "secondary_url": "/#one-pot-family"
+      }
+    },
+    "catering": {
+      "type": "bk-catering-chef-services",
+      "settings": {}
+    },
+    "shipping": {
+      "type": "bk-shipping-international",
+      "settings": {}
+    },
+    "signup": {
+      "type": "bk-one-pot-family-signup",
+      "settings": {
+        "navigation_anchor": true
+      }
+    },
+    "partnerships": {
+      "type": "bk-brand-partnerships-cta",
+      "settings": {}
+    },
+    "faq": {
+      "type": "bk-faq",
+      "settings": {}
+    },
+    "footer": {
+      "type": "bk-footer",
+      "settings": {}
+    },
+    "mobile_actions": {
+      "type": "bk-mobile-sticky-actions",
+      "settings": {}
+    }
   },
   "order": [
     "announcement",
     "header",
     "hero",
-    "trust_marquee",
     "featured_product",
+    "recipes",
+    "signup",
+    "trust_marquee",
     "benefits",
     "catalog",
     "use_it_on",
-    "recipes",
     "catering",
     "shipping",
-    "signup",
     "partnerships",
     "faq",
     "footer",
