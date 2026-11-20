@@ -1,0 +1,149 @@
+{% liquid
+  assign active_variant = product.selected_or_first_available_variant
+  assign product_form_id = 'bk-product-form-' | append: section.id
+  assign signup_form_id = 'bk-signup-' | append: section.id
+%}
+
+<section class="bk-main-product" aria-label="Product details">
+  <div class="bk-main-product__wrap">
+    <nav class="bk-main-product__nav" aria-label="Store navigation">
+      <a href="{{ routes.root_url }}">Briscoe's Kitchen &amp; Spice</a>
+      <a href="{{ routes.cart_url }}">View cart</a>
+    </nav>
+
+    {% if product != blank %}
+      <div class="bk-main-product__grid">
+        <div class="bk-main-product__media">
+          {% if product.featured_image != blank %}
+            {{ product.featured_image | image_url: width: 1400 | image_tag: loading: 'eager', widths: '360, 540, 720, 960, 1200, 1400', sizes: '(min-width: 900px) 50vw, 100vw', alt: product.title }}
+          {% else %}
+            <p>No product image available</p>
+          {% endif %}
+        </div>
+
+        <div class="bk-main-product__details">
+          {% if section.settings.show_vendor and product.vendor != blank %}
+            <p class="bk-main-product__vendor">{{ product.vendor | escape }}</p>
+          {% endif %}
+          <h1>{{ product.title | escape }}</h1>
+          <p class="bk-main-product__price" data-bk-price>{{ active_variant.price | money }}</p>
+
+          {% form 'product', product, id: product_form_id %}
+            {% if product.variants.size > 1 %}
+              <label for="{{ product_form_id }}-variant">Choose your option</label>
+              <select id="{{ product_form_id }}-variant" name="id" data-bk-variant-select required>
+                {% for variant in product.variants %}
+                  <option value="{{ variant.id }}" data-price="{{ variant.price | money | escape }}" data-available="{{ variant.available }}" {% if variant.id == active_variant.id %}selected{% endif %}>
+                    {{ variant.title | escape }}{% unless variant.available %} - Sold out{% endunless %}
+                  </option>
+                {% endfor %}
+              </select>
+            {% else %}
+              <input type="hidden" name="id" value="{{ active_variant.id }}">
+            {% endif %}
+
+            <label for="{{ product_form_id }}-quantity">Quantity</label>
+            <input id="{{ product_form_id }}-quantity" name="quantity" type="number" inputmode="numeric" min="1" value="1" required>
+            <button type="submit" data-bk-add {% unless active_variant.available %}disabled{% endunless %}>
+              {% if active_variant.available %}Add to cart{% else %}Sold out{% endif %}
+            </button>
+          {% endform %}
+
+          {% if section.settings.show_description and product.description != blank %}
+            <div class="bk-main-product__description rte">{{ product.description }}</div>
+          {% endif %}
+
+          {% for block in section.blocks %}
+            {% if block.type == '@app' %}
+              <div class="bk-main-product__app" {{ block.shopify_attributes }}>
+                {% render block %}
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+    {% endif %}
+
+    {% if section.settings.show_newsletter %}
+      <div class="bk-main-product__newsletter">
+        <h2>Join The One Pot Family</h2>
+        <p>Get seasoning drops, recipes, and Briscoe's Kitchen &amp; Spice updates.</p>
+        {% form 'customer', id: signup_form_id %}
+          <input type="hidden" name="contact[tags]" value="newsletter, social-commerce, spice-drop, one-pot-family">
+          <label for="{{ signup_form_id }}-email">Email address</label>
+          <div class="bk-main-product__signup-row">
+            <input id="{{ signup_form_id }}-email" name="contact[email]" type="email" autocomplete="email" required>
+            <button type="submit">Join the family</button>
+          </div>
+          <label for="{{ signup_form_id }}-phone">Phone (optional)</label>
+          <input id="{{ signup_form_id }}-phone" name="contact[phone]" type="tel" autocomplete="tel">
+          {% if form.posted_successfully? %}<p role="status">Thank you for signing up.</p>{% endif %}
+          {% if form.errors %}<div role="alert">{{ form.errors | default_errors }}</div>{% endif %}
+        {% endform %}
+        <p class="bk-main-product__disclaimer">By joining, you agree to receive updates from Briscoe's Kitchen &amp; Spice. You can unsubscribe anytime.</p>
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+<style>
+  #shopify-section-{{ section.id }} .bk-main-product { background: #fff8df; color: #111; min-height: 60vh; padding: 20px 0 58px; }
+  #shopify-section-{{ section.id }} .bk-main-product__wrap { width: min(1180px, calc(100% - 32px)); margin: auto; }
+  #shopify-section-{{ section.id }} .bk-main-product__nav { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 30px; padding: 12px 0 20px; border-bottom: 3px solid #050505; }
+  #shopify-section-{{ section.id }} .bk-main-product__nav a { color: #007a3d; font-weight: 800; }
+  #shopify-section-{{ section.id }} .bk-main-product__grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: start; gap: 40px; }
+  #shopify-section-{{ section.id }} .bk-main-product__media { background: #f5e6be; border: 3px solid #050505; border-radius: 12px; overflow: hidden; min-height: 340px; display: grid; place-items: center; }
+  #shopify-section-{{ section.id }} .bk-main-product__media img { display: block; width: 100%; height: auto; }
+  #shopify-section-{{ section.id }} .bk-main-product__details h1 { font-size: clamp(30px, 4.4vw, 62px); line-height: 1.05; margin: 8px 0 14px; overflow-wrap: anywhere; }
+  #shopify-section-{{ section.id }} .bk-main-product__vendor { text-transform: uppercase; letter-spacing: .08em; color: #007a3d; }
+  #shopify-section-{{ section.id }} .bk-main-product__price { font-weight: 900; font-size: clamp(30px, 3vw, 46px); margin: 12px 0 20px; }
+  #shopify-section-{{ section.id }} form[action*='/cart/add'] { display: grid; gap: 10px; }
+  #shopify-section-{{ section.id }} label { display: block; font-weight: 800; }
+  #shopify-section-{{ section.id }} select,
+  #shopify-section-{{ section.id }} input { width: 100%; min-height: 48px; border: 2px solid #111; border-radius: 6px; padding: 8px 12px; background: #fff; color: #111; font: inherit; }
+  #shopify-section-{{ section.id }} button { min-height: 52px; padding: 10px 16px; border: 2px solid #050505; border-radius: 6px; background: #009b3a; color: #fff; font: inherit; font-weight: 900; cursor: pointer; }
+  #shopify-section-{{ section.id }} button:disabled { opacity: .55; cursor: not-allowed; }
+  #shopify-section-{{ section.id }} .bk-main-product__description { margin-top: 28px; line-height: 1.55; overflow-wrap: anywhere; }
+  #shopify-section-{{ section.id }} .bk-main-product__app { margin-top: 16px; }
+  #shopify-section-{{ section.id }} .bk-main-product__newsletter { margin-top: 48px; padding: 28px; background: #050505; color: #fff; border-radius: 12px; }
+  #shopify-section-{{ section.id }} .bk-main-product__newsletter h2 { margin: 0; font-size: clamp(26px, 3vw, 40px); }
+  #shopify-section-{{ section.id }} .bk-main-product__newsletter p { margin: 8px 0 18px; }
+  #shopify-section-{{ section.id }} .bk-main-product__signup-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 10px; }
+  #shopify-section-{{ section.id }} .bk-main-product__newsletter button { background: #fed100; color: #050505; }
+  @media (max-width: 899px) { #shopify-section-{{ section.id }} .bk-main-product__grid { grid-template-columns: 1fr; gap: 28px; } }
+  @media (max-width: 640px) { #shopify-section-{{ section.id }} .bk-main-product__wrap { width: min(100% - 24px, 1180px); } #shopify-section-{{ section.id }} .bk-main-product__media { min-height: 260px; } #shopify-section-{{ section.id }} .bk-main-product__signup-row { grid-template-columns: 1fr; } #shopify-section-{{ section.id }} .bk-main-product__newsletter { padding: 20px; } }
+</style>
+
+<script>
+  (function () {
+    var root = document.getElementById('shopify-section-{{ section.id }}');
+    if (!root) return;
+    var variants = root.querySelector('[data-bk-variant-select]');
+    var price = root.querySelector('[data-bk-price]');
+    var add = root.querySelector('[data-bk-add]');
+    if (!variants || !price || !add) return;
+    variants.addEventListener('change', function () {
+      var option = variants.options[variants.selectedIndex];
+      if (!option) return;
+      var available = option.dataset.available === 'true';
+      price.textContent = option.dataset.price;
+      add.disabled = !available;
+      add.textContent = available ? 'Add to cart' : 'Sold out';
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "BK Main Product",
+  "tag": "section",
+  "class": "bk-main-product-section",
+  "settings": [
+    { "type": "checkbox", "id": "show_vendor", "label": "Show vendor", "default": false },
+    { "type": "checkbox", "id": "show_description", "label": "Show description", "default": true },
+    { "type": "checkbox", "id": "show_newsletter", "label": "Show One Pot Family signup", "default": true }
+  ],
+  "blocks": [ { "type": "@app" } ],
+  "presets": [ { "name": "BK Main Product" } ]
+}
+{% endschema %}
