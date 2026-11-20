@@ -1,0 +1,12 @@
+# Local OS/editor files are not Shopify theme assets.
+.DS_Store
+**/.DS_Store
+Thumbs.db
+
+# Local CLI, dependencies, and credentials.
+.shopify/
+node_modules/
+.env
+.env.*
+!.env.example
+*.log

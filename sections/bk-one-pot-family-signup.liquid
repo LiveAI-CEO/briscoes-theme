@@ -4,7 +4,20 @@
     <h2 class="bk-title">{{ section.settings.heading }}</h2>
     <p class="bk-body" style="max-width:820px;margin:14px auto 0;color:#ffd050;">{{ section.settings.body }}</p>
     <div class="bk-signup" style="margin-top:28px;">
-      <a class="bk-btn" href="{{ section.settings.signup_url }}">{{ section.settings.button_label }}</a>
+      {% if section.settings.signup_url != blank %}
+        <a class="bk-btn" href="{{ section.settings.signup_url }}">{{ section.settings.button_label }}</a>
+      {% else %}
+        {% form 'customer', class: 'bk-family-signup-form' %}
+          <input type="hidden" name="contact[tags]" value="newsletter, one-pot-family">
+          <label for="bk-family-email-{{ section.id }}" style="display:block;margin-bottom:8px;">Email address</label>
+          <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:12px;">
+            <input id="bk-family-email-{{ section.id }}" name="contact[email]" type="email" autocomplete="email" required placeholder="Email address" style="min-width:min(100%,260px);flex:1 1 260px;max-width:430px;min-height:48px;padding:10px;border:2px solid #fed100;border-radius:6px;color:#111;background:#fff;">
+            <button class="bk-btn" type="submit">{{ section.settings.button_label }}</button>
+          </div>
+          {% if form.posted_successfully? %}<p role="status" style="margin-top:12px;">Thanks for joining the family.</p>{% endif %}
+          {% if form.errors %}<div role="alert">{{ form.errors | default_errors }}</div>{% endif %}
+        {% endform %}
+      {% endif %}
     </div>
     <p class="bk-body" style="max-width:820px;margin:18px auto 0;font-size:14px;color:#ffd050;">{{ section.settings.disclaimer }}</p>
   </div>

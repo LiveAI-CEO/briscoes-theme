@@ -1,0 +1,71 @@
+<section class="bk-cart" aria-label="Shopping cart">
+  <div class="bk-cart__wrap">
+    <nav class="bk-cart__nav" aria-label="Store navigation"><a href="{{ routes.root_url }}">Briscoe's Kitchen &amp; Spice</a><a href="{{ routes.all_products_collection_url }}">Continue shopping</a></nav>
+    <h1>Your cart</h1>
+    {% if cart.item_count > 0 %}
+      <form action="{{ routes.cart_url }}" method="post" id="bk-cart-form">
+        <div class="bk-cart__items">
+          {% for item in cart.items %}
+            <article class="bk-cart__item">
+              <div class="bk-cart__image">{% if item.image %}<a href="{{ item.url }}">{{ item.image | image_url: width: 360 | image_tag: loading: 'lazy', alt: item.product.title }}</a>{% endif %}</div>
+              <div class="bk-cart__details">
+                <h2><a href="{{ item.url }}">{{ item.product.title | escape }}</a></h2>
+                {% unless item.variant.title == 'Default Title' %}<p>{{ item.variant.title | escape }}</p>{% endunless %}
+                {% for property in item.properties %}
+                  {% assign first_character = property.first | slice: 0 %}
+                  {% if property.last != blank and first_character != '_' %}<p>{{ property.first | escape }}: {{ property.last | escape }}</p>{% endif %}
+                {% endfor %}
+                {% if item.selling_plan_allocation %}<p>{{ item.selling_plan_allocation.selling_plan.name | escape }}</p>{% endif %}
+                <p>Unit price: {{ item.final_price | money }}</p>
+                <label for="bk-cart-qty-{{ forloop.index }}">Quantity</label>
+                <input id="bk-cart-qty-{{ forloop.index }}" type="number" name="updates[]" value="{{ item.quantity }}" min="0" step="1" inputmode="numeric">
+                <a class="bk-cart__remove" href="{{ item.url_to_remove }}">Remove</a>
+              </div>
+              <p class="bk-cart__line-price">{{ item.final_line_price | money }}</p>
+            </article>
+          {% endfor %}
+        </div>
+        <div class="bk-cart__summary">
+          <p>Subtotal: <strong>{{ cart.total_price | money }}</strong></p>
+          {% if cart.taxes_included %}
+            <p>Taxes included. Shipping calculated at checkout.</p>
+          {% else %}
+            <p>Shipping and taxes calculated at checkout.</p>
+          {% endif %}
+          <div class="bk-cart__actions">
+            <button type="submit" name="update">Update cart</button>
+            <button type="submit" name="checkout" class="bk-cart__checkout">Checkout</button>
+          </div>
+        </div>
+      </form>
+    {% else %}
+      <div class="bk-cart__empty"><p>Your cart is empty.</p><a class="bk-cart__shop" href="{{ routes.all_products_collection_url }}">Shop products</a></div>
+    {% endif %}
+  </div>
+</section>
+<style>
+  #shopify-section-{{ section.id }} .bk-cart{background:#fff8df;color:#111;min-height:65vh;padding:24px 0 64px}
+  #shopify-section-{{ section.id }} .bk-cart__wrap{width:min(1080px,calc(100% - 32px));margin:auto}
+  #shopify-section-{{ section.id }} .bk-cart__nav{display:flex;flex-wrap:wrap;justify-content:space-between;gap:14px;padding-bottom:20px;border-bottom:3px solid #050505}
+  #shopify-section-{{ section.id }} .bk-cart a{color:#006b39;font-weight:800}
+  #shopify-section-{{ section.id }} .bk-cart h1{font-size:clamp(34px,5vw,64px);line-height:1.05;margin:28px 0}
+  #shopify-section-{{ section.id }} .bk-cart__item{display:grid;grid-template-columns:140px minmax(0,1fr) auto;gap:22px;padding:24px 0;border-top:2px solid #111;align-items:start}
+  #shopify-section-{{ section.id }} .bk-cart__image img{display:block;width:100%;height:auto;border-radius:8px}
+  #shopify-section-{{ section.id }} .bk-cart__details h2{font-size:clamp(20px,3vw,30px);margin:0 0 8px}
+  #shopify-section-{{ section.id }} .bk-cart__details p{margin:8px 0}
+  #shopify-section-{{ section.id }} .bk-cart__details label{display:block;margin:16px 0 6px;font-weight:800}
+  #shopify-section-{{ section.id }} .bk-cart__details input{width:90px;min-height:48px;border:2px solid #111;border-radius:6px;font:inherit;padding:8px}
+  #shopify-section-{{ section.id }} .bk-cart__remove{display:inline-block;margin-top:12px}
+  #shopify-section-{{ section.id }} .bk-cart__line-price{font-size:20px;font-weight:900;margin:0;white-space:nowrap}
+  #shopify-section-{{ section.id }} .bk-cart__summary{border-top:3px solid #111;padding-top:20px;text-align:right}
+  #shopify-section-{{ section.id }} .bk-cart__summary p{margin:6px 0 12px}
+  #shopify-section-{{ section.id }} .bk-cart__summary strong{font-size:26px}
+  #shopify-section-{{ section.id }} .bk-cart__actions{display:flex;justify-content:flex-end;flex-wrap:wrap;gap:12px;margin-top:22px}
+  #shopify-section-{{ section.id }} .bk-cart__actions button,#shopify-section-{{ section.id }} .bk-cart__shop{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:12px 18px;border:2px solid #050505;border-radius:6px;background:#fed100;color:#050505;font:inherit;font-weight:900;cursor:pointer;text-decoration:none}
+  #shopify-section-{{ section.id }} .bk-cart__actions .bk-cart__checkout{background:#009b3a;color:#fff}
+  #shopify-section-{{ section.id }} .bk-cart__empty{padding:24px 0}
+  @media(max-width:640px){#shopify-section-{{ section.id }} .bk-cart__wrap{width:calc(100% - 24px)}#shopify-section-{{ section.id }} .bk-cart__item{grid-template-columns:94px minmax(0,1fr);gap:14px}#shopify-section-{{ section.id }} .bk-cart__line-price{grid-column:2;margin-top:2px}#shopify-section-{{ section.id }} .bk-cart__actions{flex-direction:column}#shopify-section-{{ section.id }} .bk-cart__actions button{width:100%}}
+</style>
+{% schema %}
+{"name":"BK Main Cart","tag":"section","class":"bk-main-cart-section","settings":[],"presets":[{"name":"BK Main Cart"}]}
+{% endschema %}

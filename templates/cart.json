@@ -1,0 +1,6 @@
+{
+  "sections": {
+    "main": { "type": "bk-main-cart", "settings": {} }
+  },
+  "order": ["main"]
+}
